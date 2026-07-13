@@ -12,7 +12,7 @@
 'use strict';
 
 const CONFIG = Object.freeze({
-  deliveryFee: 29,
+  deliveryFee: 49,
 
   // OWNER EDIT: Replace YOUR_FORM_ID after creating the Formspree form.
   // This endpoint identifier is designed to be used in a public form. It is not an email password.
