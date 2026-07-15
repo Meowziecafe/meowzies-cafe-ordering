@@ -94,20 +94,22 @@
         <div class="section-heading menu-heading">
           <div>
             <p class="eyebrow">Order online</p>
-            <h2 id="menu-title">Drink menu</h2>
-            <p>Choose a category, select a size where available, set the quantity, then add the drink to your cart.</p>
+           <h2 id="menu-title">Food & Drink Menu</h2>
+<p>Choose food or drinks, select an available size or flavor, set the quantity, then add the item to your cart.</p>
           </div>
           <button class="button button-secondary desktop-cart-shortcut" id="menuCartButton" type="button">Review cart</button>
         </div>
 
-        <div class="category-filters" id="categoryFilters" role="group" aria-label="Filter menu by category">
-          <button class="filter-button is-active" type="button" data-category="all" aria-pressed="true">All</button>
-          <button class="filter-button" type="button" data-category="iced-lattes" aria-pressed="false">Iced Lattes</button>
-          <button class="filter-button" type="button" data-category="milk-tea" aria-pressed="false">Milk Tea</button>
-          <button class="filter-button" type="button" data-category="thai-tea" aria-pressed="false">Thai Tea</button>
-          <button class="filter-button" type="button" data-category="floats" aria-pressed="false">Floats</button>
-          <button class="filter-button" type="button" data-category="hot-drinks" aria-pressed="false">Hot Drinks</button>
-        </div>
+       <div class="category-filters" id="categoryFilters" role="group" aria-label="Filter food and drinks by category">
+  <button class="filter-button is-active" type="button" data-category="all" aria-pressed="true">All</button>
+  <button class="filter-button" type="button" data-category="drinks" aria-pressed="false">🥤 Drinks</button>
+  <button class="filter-button" type="button" data-category="food" aria-pressed="false">🍔 Food</button>
+  <button class="filter-button" type="button" data-category="iced-lattes" aria-pressed="false">Iced Lattes</button>
+  <button class="filter-button" type="button" data-category="milk-tea" aria-pressed="false">Milk Tea</button>
+  <button class="filter-button" type="button" data-category="thai-tea" aria-pressed="false">Thai Tea</button>
+  <button class="filter-button" type="button" data-category="floats" aria-pressed="false">Floats</button>
+  <button class="filter-button" type="button" data-category="hot-drinks" aria-pressed="false">Hot Drinks</button>
+</div>
 
         <noscript>
           <div class="notice notice-error">JavaScript is required for cart calculations and online ordering. Please enable JavaScript and reload this page.</div>
@@ -214,7 +216,7 @@
       <div class="empty-cart" id="emptyCartMessage">
         <span aria-hidden="true">🐾</span>
         <h3>Your cart is empty</h3>
-        <p>Add a drink from the menu to begin your order.</p>
+        <p>Add food or a drink from the menu to begin your order.</p>
         <button class="button button-secondary" id="continueShoppingButton" type="button">Browse menu</button>
       </div>
     </div>
