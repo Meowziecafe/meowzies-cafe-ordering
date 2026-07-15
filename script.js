@@ -428,7 +428,9 @@ function addProductFromCard(productId) {
   if (!product || !product.available) return;
 
   const variantSelect = document.getElementById(`variant-${productId}`);
-  const variantId = variantSelect ? variantSelect.value : product.variants[0].id;
+  const variantId = variantSelect?.matches('select')
+  ? variantSelect.value
+  : product.variants[0].id;
   const quantityInput = document.getElementById(`quantity-${productId}`);
   const quantity = clampNumber(Number(quantityInput.value), 1, 20);
   const lineId = makeLineId(productId, variantId);
