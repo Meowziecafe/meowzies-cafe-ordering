@@ -29,6 +29,7 @@ const PRODUCTS = Object.freeze([
     name: 'Vanilla Latte',
     category: 'iced-lattes',
     categoryLabel: 'Iced Lattes',
+    menuGroup: 'drinks',
     description: 'Smooth iced coffee with creamy milk and a mellow vanilla finish.',
     image: 'images/vanilla-latte.jpg',
     imageAlt: 'Temporary product image for Vanilla Latte',
@@ -45,6 +46,7 @@ const PRODUCTS = Object.freeze([
     name: 'Caramel Latte',
     category: 'iced-lattes',
     categoryLabel: 'Iced Lattes',
+    menuGroup: 'drinks',
     description: 'Iced coffee and milk balanced with rich, buttery caramel notes.',
     image: 'images/caramel-latte.jpg',
     imageAlt: 'Temporary product image for Caramel Latte',
@@ -61,6 +63,7 @@ const PRODUCTS = Object.freeze([
     name: 'Hazelnut Latte',
     category: 'iced-lattes',
     categoryLabel: 'Iced Lattes',
+    menuGroup: 'drinks',
     description: 'A creamy iced latte with warm, lightly toasted hazelnut flavor.',
     image: 'images/hazelnut-latte.jpg',
     imageAlt: 'Temporary product image for Hazelnut Latte',
@@ -77,6 +80,7 @@ const PRODUCTS = Object.freeze([
     name: 'Spanish Latte',
     category: 'iced-lattes',
     categoryLabel: 'Iced Lattes',
+    menuGroup: 'drinks',
     description: 'A sweeter, full-bodied iced latte with a velvety milk profile.',
     image: 'images/spanish-latte.jpg',
     imageAlt: 'Temporary product image for Spanish Latte',
@@ -93,6 +97,7 @@ const PRODUCTS = Object.freeze([
     name: 'Matcha Latte',
     category: 'iced-lattes',
     categoryLabel: 'Iced Lattes',
+    menuGroup: 'drinks',
     description: 'Earthy matcha blended with chilled milk for a creamy green tea drink.',
     image: 'images/matcha-latte.jpg',
     imageAlt: 'Temporary product image for Matcha Latte',
@@ -109,6 +114,7 @@ const PRODUCTS = Object.freeze([
     name: 'Classic Milk Tea',
     category: 'milk-tea',
     categoryLabel: 'Milk Tea',
+    menuGroup: 'drinks',
     description: 'A creamy 22 oz milk tea with a familiar, comforting tea flavor.',
     image: 'images/classic-milk-tea.jpg',
     imageAlt: 'Temporary product image for Classic Milk Tea',
@@ -122,6 +128,7 @@ const PRODUCTS = Object.freeze([
     name: 'Ube Taro Milk Tea',
     category: 'milk-tea',
     categoryLabel: 'Milk Tea',
+    menuGroup: 'drinks',
     description: 'A creamy 22 oz purple milk tea with sweet ube and taro-inspired flavor.',
     image: 'images/ube-taro-milk-tea.jpg',
     imageAlt: 'Temporary product image for Ube Taro Milk Tea',
@@ -135,6 +142,7 @@ const PRODUCTS = Object.freeze([
     name: 'Thai Tea',
     category: 'thai-tea',
     categoryLabel: 'Thai Tea',
+    menuGroup: 'drinks',
     description: 'A bold and creamy 22 oz Thai tea with its signature orange color.',
     image: 'images/thai-tea.jpg',
     imageAlt: 'Temporary product image for Thai Tea',
@@ -148,6 +156,7 @@ const PRODUCTS = Object.freeze([
     name: 'Chuckie Float',
     category: 'floats',
     categoryLabel: 'Floats',
+    menuGroup: 'drinks',
     description: 'A chilled 12 oz chocolate drink finished with a creamy float topping.',
     image: 'images/chuckie-float.jpg',
     imageAlt: 'Temporary product image for Chuckie Float',
@@ -161,6 +170,7 @@ const PRODUCTS = Object.freeze([
     name: 'Coke Float',
     category: 'floats',
     categoryLabel: 'Floats',
+    menuGroup: 'drinks',
     description: 'A refreshing 12 oz cola drink topped with a creamy scoop-style float.',
     image: 'images/coke-float.jpg',
     imageAlt: 'Temporary product image for Coke Float',
@@ -174,6 +184,7 @@ const PRODUCTS = Object.freeze([
     name: 'Hot Coffee',
     category: 'hot-drinks',
     categoryLabel: 'Hot Drinks',
+    menuGroup: 'drinks',
     description: 'A simple 8 oz hot coffee highlighting the café’s local coffee character.',
     image: 'images/hot-coffee.jpg',
     imageAlt: 'Temporary product image for Hot Coffee',
@@ -187,6 +198,7 @@ const PRODUCTS = Object.freeze([
     name: 'Hot Coffee with Milk',
     category: 'hot-drinks',
     categoryLabel: 'Hot Drinks',
+    menuGroup: 'drinks',
     description: 'An 8 oz hot coffee softened with milk for a smoother, gentler cup.',
     image: 'images/hot-coffee-with-milk.jpg',
     imageAlt: 'Temporary product image for Hot Coffee with Milk',
@@ -200,6 +212,7 @@ const PRODUCTS = Object.freeze([
     name: 'Hot Chocolate',
     category: 'hot-drinks',
     categoryLabel: 'Hot Drinks',
+    menuGroup: 'drinks',
     description: 'A warm and comforting 8 oz chocolate drink with a creamy finish.',
     image: 'images/hot-chocolate.jpg',
     imageAlt: 'Temporary product image for Hot Chocolate',
@@ -207,6 +220,116 @@ const PRODUCTS = Object.freeze([
     favorite: false,
     available: true,
     variants: [{ id: '8oz', label: '8 oz', price: 49 }]
+    },
+
+  // ------------------------------------------------------------
+  // FOOD MENU
+  // OWNER EDIT: Food names, descriptions, prices and images.
+  // ------------------------------------------------------------
+
+  {
+    id: 'burger-and-fries',
+    name: 'Burger & Fries',
+    category: 'food',
+    categoryLabel: 'Food',
+    menuGroup: 'food',
+    description: 'A satisfying burger served with a side of crispy fries.',
+    image: 'images/burger-and-fries.jpg',
+    imageAlt: 'Burger with fries from Meowzie’s Cafe',
+    featured: false,
+    favorite: false,
+    available: true,
+    variants: [
+      { id: 'regular', label: '1 serving', price: 89 }
+    ]
+  },
+
+  {
+    id: 'pancakes',
+    name: 'Pancakes',
+    category: 'food',
+    categoryLabel: 'Food',
+    menuGroup: 'food',
+    description: 'Warm, fluffy pancakes served as a sweet and affordable café snack.',
+    image: 'images/pancakes.jpg',
+    imageAlt: 'Stack of pancakes from Meowzie’s Cafe',
+    featured: false,
+    favorite: true,
+    available: true,
+    variants: [
+      { id: 'regular', label: '1 serving', price: 59 }
+    ]
+  },
+
+  {
+    id: 'sandwich-with-fries',
+    name: 'Sandwich with Fries',
+    category: 'food',
+    categoryLabel: 'Food',
+    menuGroup: 'food',
+    description: 'A toasted café sandwich served with crispy fries on the side.',
+    image: 'images/sandwich-with-fries.jpg',
+    imageAlt: 'Toasted sandwich with fries from Meowzie’s Cafe',
+    featured: false,
+    favorite: false,
+    available: true,
+    variants: [
+      { id: 'regular', label: '1 serving', price: 89 }
+    ]
+  },
+
+  {
+    id: 'hotdog-with-fries',
+    name: 'Hotdog with Fries',
+    category: 'food',
+    categoryLabel: 'Food',
+    menuGroup: 'food',
+    description: 'A classic hotdog served with a side of crispy fries.',
+    image: 'images/hotdog-with-fries.jpg',
+    imageAlt: 'Hotdog with fries from Meowzie’s Cafe',
+    featured: false,
+    favorite: false,
+    available: true,
+    variants: [
+      { id: 'regular', label: '1 serving', price: 89 }
+    ]
+  },
+
+  {
+    id: 'mini-donuts',
+    name: 'Mini Donuts',
+    category: 'food',
+    categoryLabel: 'Food',
+    menuGroup: 'food',
+    description: 'Six bite-sized mini donuts, perfect for sharing or enjoying with coffee.',
+    image: 'images/mini-donuts.jpg',
+    imageAlt: 'Six mini donuts from Meowzie’s Cafe',
+    featured: false,
+    favorite: false,
+    available: true,
+    variants: [
+      { id: '6-pieces', label: '6 pieces', price: 49 }
+    ]
+  },
+
+  {
+    id: 'pansit-canton-big',
+    name: 'Pansit Canton Big',
+    category: 'food',
+    categoryLabel: 'Food',
+    menuGroup: 'food',
+    description: 'A large serving of savory Pansit Canton. Select your preferred flavor.',
+    image: 'images/pansit-canton-big.jpg',
+    imageAlt: 'Large bowl of Pansit Canton from Meowzie’s Cafe',
+    featured: false,
+    favorite: false,
+    available: true,
+    variants: [
+      { id: 'original', label: 'Original', price: 55 },
+      { id: 'sweet-and-spicy', label: 'Sweet & Spicy', price: 55 },
+      { id: 'calamansi', label: 'Calamansi', price: 55 },
+      { id: 'spicy', label: 'Spicy', price: 55 }
+    ]
   }
 ]);
 
@@ -330,7 +453,15 @@ function renderFeaturedProducts() {
 }
 
 function renderProducts() {
-  const visibleProducts = PRODUCTS.filter((product) => state.activeCategory === 'all' || product.category === state.activeCategory);
+  const visibleProducts = PRODUCTS.filter((product) => {
+    if (state.activeCategory === 'all') return true;
+    if (state.activeCategory === 'drinks') return product.menuGroup === 'drinks';
+    if (state.activeCategory === 'food') return product.menuGroup === 'food';
+
+    return product.category === state.activeCategory;
+  });
+
+  elements.productGrid.innerHTML = visibleProducts.map((product) => {
 
   elements.productGrid.innerHTML = visibleProducts.map((product) => {
     const defaultVariant = product.variants[0];
@@ -363,7 +494,7 @@ function renderProducts() {
           <div class="product-controls">
             <div class="option-row">
               <div>
-                <label class="field-label" for="variant-${product.id}">Size</label>
+                <label class="field-label" for="variant-${product.id}">${product.category === 'food' ? 'Option' : 'Size'}</label>
                 ${variantControl}
               </div>
               <div class="quantity-block">
