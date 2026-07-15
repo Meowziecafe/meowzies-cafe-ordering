@@ -461,9 +461,7 @@ function renderProducts() {
     return product.category === state.activeCategory;
   });
 
-  elements.productGrid.innerHTML = visibleProducts.map((product) => {
-
-  elements.productGrid.innerHTML = visibleProducts.map((product) => {
+   elements.productGrid.innerHTML = visibleProducts.map((product) => {
     const defaultVariant = product.variants[0];
     const hasMultipleVariants = product.variants.length > 1;
     const badge = product.favorite
