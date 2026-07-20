@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Order affordable coffee, milk tea, Thai tea, floats, hot drinks, burgers, pancakes, sandwiches, snacks, and Pansit Canton from Meowzie’s Cafe in Binalbagan, Negros Occidental.">
+  <meta name="theme-color" content="#4a2b16">
+  <title>Meowzie’s Cafe | Online Ordering</title>
+  <link rel="icon" href="images/logo.png" type="image/png">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a class="brand-link" href="#home" aria-label="Meowzie’s Cafe home">
+        <img src="images/logo.png" alt="Meowzie’s Cafe official logo" class="header-logo" width="64" height="64">
+        <span class="brand-text">Meowzie’s Cafe</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primaryNav">
+        <span class="sr-only">Open navigation</span>
+        <span aria-hidden="true">☰</span>
+      </button>
+
+      <nav class="primary-nav" id="primaryNav" aria-label="Primary navigation">
+        <a href="#home">Home</a>
+        <a href="#menu">Menu</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <button class="cart-button" id="openCartButton" type="button" aria-controls="cartDrawer" aria-expanded="false">
+        <span aria-hidden="true">🛒</span>
+        <span>Cart</span>
+        <span class="cart-count" id="cartCount" aria-label="0 items in cart">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="hero-image-wrap" aria-hidden="true">
+        <img src="images/hero-kanlaon.jpg" alt="" class="hero-image">
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="container hero-content">
+        <div class="hero-card">
+          <p class="eyebrow">Binalbagan, Negros Occidental</p>
+          <h1 id="hero-title">Comfort in every cup.</h1>
+          <p>Affordable coffee, milk tea, Thai tea, café food, snacks, and comforting meals made for students, neighbors, and unhurried café moments.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#menu">Order Now</a>
+            <a class="button button-secondary" href="#about">Our Story</a>
+          </div>
+          <p class="hero-note"><span aria-hidden="true">☕</span> Featuring locally sourced Kanlaon coffee beans from Negros.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section intro-section" aria-labelledby="welcome-title">
+      <div class="container split-layout">
+        <div>
+          <p class="eyebrow">Warm, local, student-friendly</p>
+          <h2 id="welcome-title">Welcome to Meowzie’s Cafe</h2>
+          <p>Meowzie’s Cafe brings together locally inspired coffee, creamy milk tea, bold Thai tea, refreshing floats, and cozy hot drinks at approachable prices.</p>
+          <p>Our website lets you build an order, review the total, pay using GCash, and send your order details to the café for manual payment verification.</p>
+        </div>
+        <aside class="feature-panel" aria-label="Cafe highlights">
+          <div class="feature-item"><span aria-hidden="true">⛰️</span><strong>Kanlaon coffee</strong><span>Locally sourced from Negros</span></div>
+          <div class="feature-item"><span aria-hidden="true">🎓</span><strong>Student-friendly</strong><span>Affordable choices and a welcoming atmosphere</span></div>
+          <div class="feature-item"><span aria-hidden="true">🐾</span><strong>Made with care</strong><span>A light cat theme, without the clutter</span></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section featured-section" aria-labelledby="featured-title">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Popular picks</p>
+            <h2 id="featured-title">Featured drinks</h2>
+          </div>
+          <a href="#menu" class="text-link">View full menu <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="featured-grid" id="featuredGrid"></div>
+      </div>
+    </section>
+
+    <section class="section menu-section" id="menu" aria-labelledby="menu-title">
+      <div class="container">
+        <div class="section-heading menu-heading">
+          <div>
+            <p class="eyebrow">Order online</p>
+           <h2 id="menu-title">Food & Drink Menu</h2>
+<p>Choose food or drinks, select an available size or flavor, set the quantity, then add the item to your cart.</p>
+          </div>
+          <button class="button button-secondary desktop-cart-shortcut" id="menuCartButton" type="button">Review cart</button>
+        </div>
+
+       <div class="category-filters" id="categoryFilters" role="group" aria-label="Filter food and drinks by category">
+  <button class="filter-button is-active" type="button" data-category="all" aria-pressed="true">All</button>
+  <button class="filter-button" type="button" data-category="drinks" aria-pressed="false">🥤 Drinks</button>
+  <button class="filter-button" type="button" data-category="food" aria-pressed="false">🍔 Food</button>
+  <button class="filter-button" type="button" data-category="iced-lattes" aria-pressed="false">Iced Lattes</button>
+  <button class="filter-button" type="button" data-category="milk-tea" aria-pressed="false">Milk Tea</button>
+  <button class="filter-button" type="button" data-category="thai-tea" aria-pressed="false">Thai Tea</button>
+  <button class="filter-button" type="button" data-category="floats" aria-pressed="false">Floats</button>
+  <button class="filter-button" type="button" data-category="hot-drinks" aria-pressed="false">Hot Drinks</button>
+</div>
+
+        <noscript>
+          <div class="notice notice-error">JavaScript is required for cart calculations and online ordering. Please enable JavaScript and reload this page.</div>
+        </noscript>
+
+        <div class="product-grid" id="productGrid" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="section coffee-story" aria-labelledby="coffee-title">
+      <div class="container coffee-story-inner">
+        <div class="coffee-story-copy">
+          <p class="eyebrow">From Negros, with character</p>
+          <h2 id="coffee-title">Locally sourced Kanlaon coffee</h2>
+          <p>Our coffee identity is inspired by the farms and volcanic landscape around Kanlaon. It is a local point of pride and a distinctive foundation for the café’s hot and iced coffee drinks.</p>
+          <p class="small-print">We only use Kanlaon coffee beans!</p>
+        </div>
+        <img src="images/logo.png" alt="Meowzie’s Cafe cat logo with coffee, milk tea, coffee leaves, and Kanlaon mountain" class="coffee-story-logo" loading="lazy">
+      </div>
+    </section>
+
+    <section class="section about-section" id="about" aria-labelledby="about-title">
+      <div class="container">
+        <p class="eyebrow">About us</p>
+        <h2 id="about-title">A neighborhood café with a local heart</h2>
+
+        <!-- OWNER EDIT: Replace the paragraph below with the real story of Meowzie’s Cafe. -->
+        <p class="about-lead editable-placeholder">Meowzie's Cafe is dedicated to the owner's deceased cat, Meowzie. Rest in peace, little guy.</p>
+
+        <div class="about-grid">
+          <article>
+            <h3>Our Story</h3>
+            <!-- OWNER EDIT: Replace this paragraph. -->
+            <p class="editable-placeholder"> My name is Antonio, the owner of Meowzie's Cafe. I am a Mexican-American. My girlfriend, Marrielle, is the manager of the store. As a former college student, I understand the importance of a good study spot to the normal college student. When I took a look at CHMSU and the surrounding area, I understood the need for a place like Meowzie's Cafe. You need a place where you can not only study, but also hang out with your friends. Our space may be small, but we tried to make it as efficient as possible to fit as many students we could. We offer fast Wi-Fi and electrical outlets so that if you have an assignment you need to complete or if you just want to watch Tiktok's - you can do that. I hope that my coffee shop can be your favorite place to hang out near CHMSU! Our cafe is dedicated to my cat Meowzie and our newborn baby daughter, Amy.  </p>
+          </article>
+          <article>
+            <h3>Our Drinks & Food</h3>
+            <!-- OWNER EDIT: Replace this paragraph. -->
+            <p class="editable-placeholder"> We offer a wide variety of drinks ranging from Iced Lattes to Matcha to even Thai Tea! Initially, the coffee shop was only meant to serve Hot Coffee & Iced Latte's. However, I am someone who likes to switch it up from time to time. In all honesty, my favorite drink is the Spanish Latte but every now and then, I like to get a Matcha Latte - or even something else that seems interesting at the time. That's when we decided to expand our menu offerings and offer alternative drinks like Milk Tea and Matcha. We also pride ourselves on being one of the few places in Negros Occidental (particularly Binalbagan) that offers the rare Thai Tea! We use real tea from Thailand to make our Thai Tea. I first made Thai Tea in 2018 in my apartment in Anaheim, California out of boredom. Overtime, I developed a recipe that I really liked. That same recipe is what we use in Meowzie's Cafe. I hope you like it!   </p>
+          </article>
+          <article>
+            <h3>Why Kanlaon Coffee</h3>
+            <!-- OWNER EDIT: Replace this paragraph. -->
+            <p class="editable-placeholder">In America, a lot businesses like to pride themselves on using local ingredients. For us, it a symbol that you're not running a business purely to make money and that you're willing to give back to the community. By serving coffee made purely with Kanlaon Coffee beans, we are supporting local farmers from the Negros region and giving back to this beautiful island. When I first arrived to Negros, I had no idea there was a Volcano on the island but after many Apple notifications warning me of the ash every couple of minutes, I became very aware of it. Having come from a Guatemalan mother, I know that in many cases Volcano = Coffee can be grown. When you drink our lattes, know that you're drinking something that is grown locally by your community. </p>
+          </article>
+          <article>
+            <h3>Our Community</h3>
+            <!-- OWNER EDIT: Replace this paragraph. -->
+            <p class="editable-placeholder"> By using coffee beans from Kanlaon's volcanic region, we are supporting local farmers. They could be your brother, your cousin, a friend of a friend, etcetera. We want to make sure we give back to the island of Negros. </p>
+          </article>
+          <article>
+            <h3>Our Commitment to Students</h3>
+            <!-- OWNER EDIT: Replace this paragraph. -->
+            <p class="editable-placeholder"> Our small coffee shop is equipped with a table that was custom-designed for the laptop-using student. Our charging ports and fast Wi-Fi (please ask for the password) demonstrate that we care about the environment you study in. My commitment to you is that we will always do our best to have the best interest of the CHMSU student in mind. If you have any suggestions, please E-mail me. I have provided my E-mail below. I will respond to as many E-mails as I can and I will take your comments and your suggestions seriously.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contact" aria-labelledby="contact-title">
+      <div class="container contact-layout">
+        <div>
+          <p class="eyebrow">Contact and visit</p>
+          <h2 id="contact-title">Business information</h2>
+          <p>Replace every clearly marked placeholder below before publicly promoting the website.</p>
+        </div>
+        <dl class="contact-list">
+          <!-- OWNER EDIT: Replace the placeholder values below. Do not invent details. -->
+          <div><dt>Address</dt><dd class="editable-placeholder">Near CHMSU in Enclaro, Binalbagan</dd></div>
+          <div><dt>Mobile number</dt><dd class="editable-placeholder">+63 993 463 3998</dd></div>
+          <div><dt>Email</dt><dd class="editable-placeholder">meow@meowziecafe.com</dd></div>
+          <div><dt>Facebook</dt><dd class="editable-placeholder">https://www.facebook.com/profile.php?id=61590639962770</dd></div>
+          <div><dt>Instagram</dt><dd class="editable-placeholder">https://www.instagram.com/meowziescafe</dd></div>
+          <div><dt>Operating hours</dt><dd class="editable-placeholder">Monday Through Friday 8AM-5PM</dd></div>
+          <div><dt>Delivery area</dt><dd class="editable-placeholder">Near CHMSU within 2km</dd></div>
+        </dl>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>Meowzie’s Cafe</strong>
+        <p>Coffee • Milk Tea • Thai Tea</p>
+      </div>
+      <p>Orders are accepted subject to availability and manual GCash payment verification.</p>
+      <a href="#top" class="text-link">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <div class="drawer-backdrop" id="cartBackdrop" hidden></div>
+  <aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-labelledby="cartTitle" aria-hidden="true">
+    <div class="cart-header">
+      <div>
+        <p class="eyebrow">Your order</p>
+        <h2 id="cartTitle">Shopping cart</h2>
+      </div>
+      <button class="icon-button" id="closeCartButton" type="button" aria-label="Close cart">×</button>
+    </div>
+
+    <div class="cart-body">
+      <div class="cart-items" id="cartItems"></div>
+      <div class="empty-cart" id="emptyCartMessage">
+        <span aria-hidden="true">🐾</span>
+        <h3>Your cart is empty</h3>
+        <p>Add food or a drink from the menu to begin your order.</p>
+        <button class="button button-secondary" id="continueShoppingButton" type="button">Browse menu</button>
+      </div>
+    </div>
+
+    <div class="cart-footer" id="cartFooter">
+      <dl class="totals-list">
+        <div><dt>Subtotal</dt><dd id="cartSubtotal">₱0</dd></div>
+        <div><dt>Delivery fee</dt><dd id="cartDelivery">₱0</dd></div>
+        <div class="grand-total"><dt>Total</dt><dd id="cartTotal">₱0</dd></div>
+      </dl>
+      <p class="small-print">The fixed ₱49 delivery fee is applied whenever the cart contains at least one item.</p>
+      <button class="button button-primary button-full" id="checkoutButton" type="button">Continue to checkout</button>
+    </div>
+  </aside>
+
+  <dialog class="checkout-dialog" id="checkoutDialog" aria-labelledby="checkoutTitle">
+    <div class="checkout-shell">
+      <div class="checkout-header">
+        <div>
+          <p class="eyebrow">Secure order details</p>
+          <h2 id="checkoutTitle">Checkout</h2>
+          <p class="order-number-line">Order number: <strong id="checkoutOrderNumber">—</strong></p>
+        </div>
+        <button class="icon-button" id="closeCheckoutButton" type="button" aria-label="Close checkout">×</button>
+      </div>
+
+      <div id="checkoutFormView">
+        <form id="checkoutForm" novalidate>
+          <div class="checkout-grid">
+            <div class="checkout-fields">
+              <section class="form-section" aria-labelledby="customer-heading">
+                <h3 id="customer-heading">Customer information</h3>
+                <div class="field-grid">
+                  <div class="field field-wide">
+                    <label for="fullName">Full name <span aria-hidden="true">*</span></label>
+                    <input id="fullName" name="full_name" type="text" autocomplete="name" maxlength="100" required>
+                    <span class="field-hint">Use the name the rider or café should ask for.</span>
+                  </div>
+
+                  <div class="field field-wide">
+                    <label for="mobileNumber">Mobile number <span aria-hidden="true">*</span></label>
+                    <input id="mobileNumber" name="mobile_number" type="tel" inputmode="tel" autocomplete="tel" placeholder="09XX XXX XXXX or +63 9XX XXX XXXX" maxlength="20" required>
+                    <span class="field-hint">Philippine mobile formats beginning with 09 or +63 are accepted.</span>
+                    <span class="field-error" id="mobileNumberError"></span>
+                  </div>
+                </div>
+              </section>
+
+              <section class="form-section" aria-labelledby="delivery-heading">
+                <h3 id="delivery-heading">Delivery details</h3>
+                <div class="field-grid">
+                  <div class="field field-wide">
+                    <label for="completeAddress">Complete delivery address <span aria-hidden="true">*</span></label>
+                    <textarea id="completeAddress" name="complete_address" rows="3" autocomplete="street-address" maxlength="300" required></textarea>
+                  </div>
+                  <div class="field">
+                    <label for="barangay">Barangay <span aria-hidden="true">*</span></label>
+                    <input id="barangay" name="barangay" type="text" maxlength="100" required>
+                  </div>
+                  <div class="field">
+                    <label for="landmark">Nearby landmark <span aria-hidden="true">*</span></label>
+                    <input id="landmark" name="nearby_landmark" type="text" maxlength="150" required>
+                  </div>
+                  <div class="field field-wide">
+                    <label for="deliveryInstructions">Delivery instructions <span aria-hidden="true">*</span></label>
+                    <textarea id="deliveryInstructions" name="delivery_instructions" rows="2" maxlength="300" placeholder="Gate color, building entrance, who to ask for, or other useful directions" required></textarea>
+                  </div>
+                  <div class="field field-wide">
+                    <label for="orderNotes">Optional order notes</label>
+                    <textarea id="orderNotes" name="order_notes" rows="2" maxlength="300" placeholder="Example: Less ice, please. Requests are subject to availability."></textarea>
+                  </div>
+                </div>
+              </section>
+
+              <section class="form-section" aria-labelledby="payment-heading">
+                <h3 id="payment-heading">GCash payment details</h3>
+                <div class="gcash-card">
+                  <div>
+                    <img src="images/gcash-qr-placeholder.png" alt="Temporary GCash QR placeholder; the café owner must replace this image before accepting live orders" class="gcash-qr" id="gcashQrImage" width="520" height="520">
+                  </div>
+                  <div class="gcash-instructions">
+                    <p><strong>Amount to send:</strong> <span id="gcashTotal">₱0</span></p>
+                    <p><strong>GCash account name:</strong> <span class="editable-placeholder" id="gcashAccountName">[REPLACE IN script.js]</span></p>
+                    <p><strong>GCash number:</strong> <span class="editable-placeholder" id="gcashAccountNumber">[REPLACE IN script.js]</span></p>
+                    <ol>
+                      <li>Scan the QR code using GCash on another device, or save the QR image and open it in GCash if supported.</li>
+                      <li>Send the exact total displayed above.</li>
+                      <li>Keep your receipt and copy the GCash reference number.</li>
+                      <li>Submit this form. Meowzie’s Cafe will manually verify the payment.</li>
+                    </ol>
+                  </div>
+                </div>
+
+                <div class="notice notice-warning" role="note">
+                  <strong>Payment safety</strong>
+                  <ul>
+                    <li>Never provide your GCash MPIN or OTP.</li>
+                    <li>The order is not considered paid until Meowzie’s Cafe manually verifies the payment.</li>
+                    <li>Entering a reference number does not automatically prove payment.</li>
+                  </ul>
+                </div>
+
+                <div class="field-grid">
+                  <div class="field">
+                    <label for="gcashSenderName">GCash sender/account name <span aria-hidden="true">*</span></label>
+                    <input id="gcashSenderName" name="gcash_sender_name" type="text" maxlength="100" required>
+                  </div>
+                  <div class="field">
+                    <label for="gcashReference">GCash reference number <span aria-hidden="true">*</span></label>
+                    <input id="gcashReference" name="gcash_reference_number" type="text" inputmode="numeric" minlength="6" maxlength="30" autocomplete="off" required>
+                  </div>
+                  <div class="field field-wide checkbox-field">
+                    <input id="paymentConfirmation" name="payment_confirmation" type="checkbox" required>
+                    <label for="paymentConfirmation">I confirm that I sent the exact displayed total of <strong id="confirmationTotal">₱0</strong> to the GCash account shown above. <span aria-hidden="true">*</span></label>
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            <aside class="checkout-summary" aria-labelledby="summary-heading">
+              <h3 id="summary-heading">Order summary</h3>
+              <div id="checkoutItems" class="checkout-items"></div>
+              <dl class="totals-list checkout-totals">
+                <div><dt>Subtotal</dt><dd id="checkoutSubtotal">₱0</dd></div>
+                <div><dt>Delivery fee</dt><dd id="checkoutDelivery">₱49</dd></div>
+                <div class="grand-total"><dt>Total</dt><dd id="checkoutTotal">₱0</dd></div>
+              </dl>
+              <p class="small-print">Your cart and entered information stay in this browser if submission fails or the page is refreshed.</p>
+            </aside>
+          </div>
+
+          <div class="submission-status" id="submissionStatus" role="alert" aria-live="assertive"></div>
+          <div class="checkout-actions">
+            <button class="button button-secondary" id="backToCartButton" type="button">Back to cart</button>
+            <button class="button button-primary" id="submitOrderButton" type="submit">Submit order for verification</button>
+          </div>
+        </form>
+      </div>
+
+      <section class="confirmation-view" id="confirmationView" hidden aria-labelledby="confirmation-title">
+        <div class="confirmation-icon" aria-hidden="true">✓</div>
+        <h2 id="confirmation-title">Order submitted</h2>
+        <p>Your order number is:</p>
+        <p class="confirmation-number" id="confirmationOrderNumber">—</p>
+        <p><strong>Payment status: Pending manual verification.</strong></p>
+        <p>Meowzie’s Cafe must compare your GCash reference and receipt with the payment received. Keep your GCash receipt until the café confirms the order.</p>
+        <p class="small-print">Submitting a reference number does not by itself prove payment.</p>
+        <button class="button button-primary" id="finishOrderButton" type="button">Return to website</button>
+      </section>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+</body>
+</html>
+
