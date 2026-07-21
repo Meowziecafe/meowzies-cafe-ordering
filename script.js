@@ -785,10 +785,12 @@ function addProductFromCard(productId) {
     : product.variants[0].id;
   const quantityInput = document.getElementById(`quantity-${productId}`);
   const quantity = clampNumber(Number(quantityInput.value), 1, 20);
-  addCartLine(productId, variantId, quantity);
+  const mealLineId = addCartLine(productId, variantId, quantity);
 
   const addOnProductId = document.getElementById(`add-on-${productId}`)?.value;
-  if (addOnProductId) addCartLine(addOnProductId, 'add-on', quantity);
+  // A ₱20 drink add-on belongs to this exact meal line. It is not a standalone
+  // product, so the cart can remove it automatically when the meal is removed.
+  if (addOnProductId) addCartLine(addOnProductId, 'add-on', quantity, mealLineId);
 
   saveCart();
   renderCart();
@@ -799,15 +801,19 @@ function addProductFromCard(productId) {
   window.setTimeout(() => { if (feedback) feedback.textContent = ''; }, 2600);
 }
 
-function addCartLine(productId, variantId, quantity) {
-  const lineId = makeLineId(productId, variantId);
+function addCartLine(productId, variantId, quantity, parentLineId = null) {
+  const lineId = parentLineId
+    ? makeLinkedAddOnLineId(productId, variantId, parentLineId)
+    : makeLineId(productId, variantId);
   const existingLine = state.cart.find((line) => line.lineId === lineId);
 
   if (existingLine) {
     existingLine.quantity = clampNumber(existingLine.quantity + quantity, 1, 99);
   } else {
-    state.cart.push({ lineId, productId, variantId, quantity });
+    state.cart.push({ lineId, productId, variantId, quantity, ...(parentLineId ? { parentLineId } : {}) });
   }
+
+  return lineId;
 }
 
 function handleCartClick(event) {
@@ -820,9 +826,27 @@ function handleCartClick(event) {
   const line = state.cart.find((item) => item.lineId === lineId);
   if (!line) return;
 
-  if (action === 'increase') line.quantity = clampNumber(line.quantity + 1, 1, 99);
-  if (action === 'decrease') line.quantity = clampNumber(line.quantity - 1, 1, 99);
-  if (action === 'remove') state.cart = state.cart.filter((item) => item.lineId !== lineId);
+  if (action === 'increase') {
+    const parentLine = line.parentLineId ? state.cart.find((item) => item.lineId === line.parentLineId) : null;
+    const maximumQuantity = parentLine ? parentLine.quantity : 99;
+    line.quantity = clampNumber(Math.min(line.quantity + 1, maximumQuantity), 1, 99);
+  }
+
+  if (action === 'decrease') {
+    line.quantity = clampNumber(line.quantity - 1, 1, 99);
+    // Reducing a meal also reduces a linked add-on when needed, so an add-on can
+    // never have a higher quantity than the meal it belongs to.
+    if (!line.parentLineId) {
+      state.cart.forEach((item) => {
+        if (item.parentLineId === lineId) item.quantity = Math.min(item.quantity, line.quantity);
+      });
+    }
+  }
+
+  if (action === 'remove') {
+    // Removing a meal also removes every ₱20 drink add-on attached to it.
+    state.cart = state.cart.filter((item) => item.lineId !== lineId && item.parentLineId !== lineId);
+  }
 
   saveCart();
   renderCart();
@@ -1256,12 +1280,21 @@ function sanitizeStoredCart() {
     ? state.cart.filter((line) => {
         const product = getProduct(line.productId);
         const variant = product ? getVariant(product, line.variantId) : null;
-        return product && variant && Number.isFinite(Number(line.quantity)) && Number(line.quantity) > 0;
+        const isHiddenAddOn = product?.showInMenu === false;
+        return product
+          && variant
+          && Number.isFinite(Number(line.quantity))
+          && Number(line.quantity) > 0
+          // Older, unlinked add-on lines must not become standalone ₱20 drinks.
+          && (!isHiddenAddOn || typeof line.parentLineId === 'string');
       }).map((line) => ({
-        lineId: makeLineId(line.productId, line.variantId),
+        lineId: line.parentLineId
+          ? makeLinkedAddOnLineId(line.productId, line.variantId, line.parentLineId)
+          : makeLineId(line.productId, line.variantId),
         productId: line.productId,
         variantId: line.variantId,
-        quantity: clampNumber(Number(line.quantity), 1, 99)
+        quantity: clampNumber(Number(line.quantity), 1, 99),
+        ...(line.parentLineId ? { parentLineId: line.parentLineId } : {})
       }))
     : [];
 
@@ -1272,7 +1305,16 @@ function sanitizeStoredCart() {
     else mergedLines.set(line.lineId, line);
   }
 
-  state.cart = [...mergedLines.values()];
+  const mergedCart = [...mergedLines.values()];
+  const parentLineIds = new Set(mergedCart.filter((line) => !line.parentLineId).map((line) => line.lineId));
+
+  state.cart = mergedCart
+    .filter((line) => !line.parentLineId || parentLineIds.has(line.parentLineId))
+    .map((line) => {
+      if (!line.parentLineId) return line;
+      const parentLine = mergedCart.find((item) => item.lineId === line.parentLineId);
+      return { ...line, quantity: Math.min(line.quantity, parentLine.quantity) };
+    });
   saveCart();
 }
 
@@ -1340,6 +1382,10 @@ function getVariant(product, variantId) {
 
 function makeLineId(productId, variantId) {
   return `${productId}::${variantId}`;
+}
+
+function makeLinkedAddOnLineId(productId, variantId, parentLineId) {
+  return `${makeLineId(productId, variantId)}::for::${parentLineId}`;
 }
 
 function formatPeso(value) {
