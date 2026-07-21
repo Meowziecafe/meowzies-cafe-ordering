@@ -330,6 +330,208 @@ const PRODUCTS = Object.freeze([
       { id: 'calamansi', label: 'Calamansi', price: 55 },
       { id: 'spicy', label: 'Spicy', price: 55 }
     ]
+  },
+
+  // ------------------------------------------------------------
+  // MEOWZIE'S SILOG & SNACKS
+  // These meals can optionally include a Lemonade or Iced Tea add-on.
+  // ------------------------------------------------------------
+  {
+    id: 'hotsilog',
+    name: 'Hotsilog',
+    category: 'silog-menu',
+    categoryLabel: 'Silog & Snacks',
+    menuGroup: 'food',
+    description: 'Two hotdogs with garlic rice and a sunny-side-up egg.',
+    image: 'images/hotsilog.jpg',
+    imageAlt: 'Hotsilog with hotdogs, garlic rice, and egg on a white plate',
+    featured: false,
+    favorite: false,
+    available: true,
+    canAddDrink: true,
+    variants: [{ id: 'regular', label: '1 serving', price: 79 }]
+  },
+  {
+    id: 'hamsilog',
+    name: 'Hamsilog',
+    category: 'silog-menu',
+    categoryLabel: 'Silog & Snacks',
+    menuGroup: 'food',
+    description: 'Seared ham with garlic rice and a sunny-side-up egg.',
+    image: 'images/hamsilog.jpg',
+    imageAlt: 'Hamsilog with ham, garlic rice, and egg on a white plate',
+    featured: false,
+    favorite: false,
+    available: true,
+    canAddDrink: true,
+    variants: [{ id: 'regular', label: '1 serving', price: 79 }]
+  },
+  {
+    id: 'lumpsilog',
+    name: 'Lumsilog',
+    category: 'silog-menu',
+    categoryLabel: 'Silog & Snacks',
+    menuGroup: 'food',
+    description: 'Crispy lumpia with garlic rice and a sunny-side-up egg.',
+    image: 'images/lumpsilog.jpg',
+    imageAlt: 'Lumpsilog with lumpia, garlic rice, and egg on a white plate',
+    featured: false,
+    favorite: false,
+    available: true,
+    canAddDrink: true,
+    variants: [{ id: 'regular', label: '1 serving', price: 85 }]
+  },
+  {
+    id: 'chixsilog',
+    name: 'Chixsilog',
+    category: 'silog-menu',
+    categoryLabel: 'Silog & Snacks',
+    menuGroup: 'food',
+    description: 'Crispy fried chicken with garlic rice and a sunny-side-up egg.',
+    image: 'images/chixsilog.jpg',
+    imageAlt: 'Chixsilog with fried chicken, garlic rice, and egg on a white plate',
+    featured: false,
+    favorite: false,
+    available: true,
+    canAddDrink: true,
+    variants: [{ id: 'regular', label: '1 serving', price: 85 }]
+  },
+  {
+    id: 'spamsilog',
+    name: 'Spamsilog',
+    category: 'silog-menu',
+    categoryLabel: 'Silog & Snacks',
+    menuGroup: 'food',
+    description: 'Grilled Spam with garlic rice and a sunny-side-up egg.',
+    image: 'images/spamsilog.jpg',
+    imageAlt: 'Spamsilog with grilled Spam, garlic rice, and egg on a white plate',
+    featured: false,
+    favorite: false,
+    available: true,
+    canAddDrink: true,
+    variants: [{ id: 'regular', label: '1 serving', price: 80 }]
+  },
+  {
+    id: 'burgersteak',
+    name: 'Burgersteak',
+    category: 'silog-menu',
+    categoryLabel: 'Silog & Snacks',
+    menuGroup: 'food',
+    description: 'A savory burger patty in mushroom gravy with garlic rice.',
+    image: 'images/burgersteak.jpg',
+    imageAlt: 'Burger steak with mushroom gravy and garlic rice on a white plate',
+    featured: false,
+    favorite: false,
+    available: true,
+    canAddDrink: true,
+    variants: [{ id: 'regular', label: '1 serving', price: 80 }]
+  },
+  {
+    id: 'siomai-rice-with-egg',
+    name: 'Siomai Rice with Egg',
+    category: 'silog-menu',
+    categoryLabel: 'Silog & Snacks',
+    menuGroup: 'food',
+    description: 'Four siomai with garlic rice, a sunny-side-up egg, and dipping sauce.',
+    image: 'images/siomai-rice-with-egg.jpg',
+    imageAlt: 'Siomai rice with egg and a small dipping sauce bowl',
+    featured: false,
+    favorite: false,
+    available: true,
+    canAddDrink: true,
+    variants: [{ id: 'regular', label: '1 serving', price: 69 }]
+  },
+  {
+    id: 'nachos',
+    name: 'Nachos',
+    category: 'silog-menu',
+    categoryLabel: 'Silog & Snacks',
+    menuGroup: 'food',
+    description: 'Crispy corn chips topped with warm cheese, beef, and mayo.',
+    image: 'images/nachos.jpg',
+    imageAlt: 'Nachos with cheese, beef, and mayonnaise in a paper-lined tray',
+    featured: false,
+    favorite: false,
+    available: true,
+    canAddDrink: true,
+    variants: [{ id: 'regular', label: '1 serving', price: 59 }]
+  },
+  {
+    id: 'nachos-with-fries',
+    name: 'Nacho with Fries',
+    category: 'silog-menu',
+    categoryLabel: 'Silog & Snacks',
+    menuGroup: 'food',
+    description: 'Loaded nachos served with a satisfying side of crispy fries.',
+    image: 'images/nachos-with-fries.jpg',
+    imageAlt: 'Loaded nachos with fries in a paper-lined tray',
+    featured: false,
+    favorite: false,
+    available: true,
+    canAddDrink: true,
+    variants: [{ id: 'regular', label: '1 serving', price: 79 }]
+  },
+
+  // These remain normal standalone drinks in the Drinks section.
+  {
+    id: 'lemonade',
+    name: 'Lemonade',
+    category: 'cold-drinks',
+    categoryLabel: 'Cold Drinks',
+    menuGroup: 'drinks',
+    description: 'A refreshing iced lemonade served in a clear cup.',
+    image: 'images/lemonade.jpg',
+    imageAlt: 'Iced lemonade in a clear cup on a wooden café table',
+    featured: false,
+    favorite: false,
+    available: true,
+    variants: [{ id: 'regular', label: 'Regular', price: 39 }]
+  },
+  {
+    id: 'iced-tea',
+    name: 'Iced Tea',
+    category: 'cold-drinks',
+    categoryLabel: 'Cold Drinks',
+    menuGroup: 'drinks',
+    description: 'A refreshing amber iced tea served in a clear cup.',
+    image: 'images/iced-tea.jpg',
+    imageAlt: 'Amber iced tea in a clear cup on a wooden café table',
+    featured: false,
+    favorite: false,
+    available: true,
+    variants: [{ id: 'regular', label: 'Regular', price: 39 }]
+  },
+
+  // Hidden helper items are only added through a Silog or snack card's optional add-on selector.
+  {
+    id: 'lemonade-add-on',
+    name: 'Lemonade Add-on',
+    category: 'cold-drinks',
+    categoryLabel: 'Drink Add-on',
+    menuGroup: 'drinks',
+    showInMenu: false,
+    description: 'Optional food add-on drink.',
+    image: 'images/lemonade.jpg',
+    imageAlt: 'Iced lemonade in a clear cup',
+    featured: false,
+    favorite: false,
+    available: true,
+    variants: [{ id: 'add-on', label: 'Food add-on', price: 20 }]
+  },
+  {
+    id: 'iced-tea-add-on',
+    name: 'Iced Tea Add-on',
+    category: 'cold-drinks',
+    categoryLabel: 'Drink Add-on',
+    menuGroup: 'drinks',
+    showInMenu: false,
+    description: 'Optional food add-on drink.',
+    image: 'images/iced-tea.jpg',
+    imageAlt: 'Amber iced tea in a clear cup',
+    featured: false,
+    favorite: false,
+    available: true,
+    variants: [{ id: 'add-on', label: 'Food add-on', price: 20 }]
   }
 ]);
 
@@ -439,7 +641,7 @@ function populateAccountPlaceholders() {
 }
 
 function renderFeaturedProducts() {
-  const featured = PRODUCTS.filter((product) => product.featured && product.available).slice(0, 3);
+  const featured = PRODUCTS.filter((product) => product.showInMenu !== false && product.featured && product.available).slice(0, 3);
   elements.featuredGrid.innerHTML = featured.map((product) => {
     const lowestPrice = Math.min(...product.variants.map((variant) => variant.price));
     return `
@@ -457,6 +659,7 @@ function renderFeaturedProducts() {
 
 function renderProducts() {
   const visibleProducts = PRODUCTS.filter((product) => {
+    if (product.showInMenu === false) return false;
     if (state.activeCategory === 'all') return true;
     if (state.activeCategory === 'drinks') return product.menuGroup === 'drinks';
     if (state.activeCategory === 'food') return product.menuGroup === 'food';
@@ -479,6 +682,17 @@ function renderProducts() {
         </select>`
       : `<span class="field-label" id="variant-label-${product.id}">${optionLabel}</span>
         <div class="select-control" id="variant-${product.id}" aria-label="${optionLabel}: ${defaultVariant.label}">${defaultVariant.label}</div>`;
+
+    const drinkAddOnControl = product.canAddDrink
+      ? `<div class="drink-add-on">
+          <label class="field-label" for="add-on-${product.id}">Add a drink <span>optional · +₱20</span></label>
+          <select class="select-control product-add-on" id="add-on-${product.id}" aria-label="Optional drink add-on for ${product.name}">
+            <option value="">No drink add-on</option>
+            <option value="lemonade-add-on">Lemonade +₱20</option>
+            <option value="iced-tea-add-on">Iced Tea +₱20</option>
+          </select>
+        </div>`
+      : '';
 
     return `
       <article class="product-card ${product.menuGroup === 'drinks' ? 'product-card-drink' : ''} ${product.available ? '' : 'is-unavailable'}" data-product-card="${product.id}">
@@ -509,6 +723,7 @@ function renderProducts() {
                 </div>
               </div>
             </div>
+            ${drinkAddOnControl}
             <button class="button button-primary add-button" type="button" data-product-action="add" data-product-id="${product.id}" ${product.available ? '' : 'disabled'}>
               ${product.available ? 'Add to Cart' : 'Currently unavailable'}
             </button>
@@ -570,6 +785,21 @@ function addProductFromCard(productId) {
     : product.variants[0].id;
   const quantityInput = document.getElementById(`quantity-${productId}`);
   const quantity = clampNumber(Number(quantityInput.value), 1, 20);
+  addCartLine(productId, variantId, quantity);
+
+  const addOnProductId = document.getElementById(`add-on-${productId}`)?.value;
+  if (addOnProductId) addCartLine(addOnProductId, 'add-on', quantity);
+
+  saveCart();
+  renderCart();
+  quantityInput.value = 1;
+
+  const feedback = document.getElementById(`feedback-${productId}`);
+  if (feedback) feedback.textContent = `${quantity} × ${product.name}${addOnProductId ? ' with drink add-on' : ''} added to your cart.`;
+  window.setTimeout(() => { if (feedback) feedback.textContent = ''; }, 2600);
+}
+
+function addCartLine(productId, variantId, quantity) {
   const lineId = makeLineId(productId, variantId);
   const existingLine = state.cart.find((line) => line.lineId === lineId);
 
@@ -578,14 +808,6 @@ function addProductFromCard(productId) {
   } else {
     state.cart.push({ lineId, productId, variantId, quantity });
   }
-
-  saveCart();
-  renderCart();
-  quantityInput.value = 1;
-
-  const feedback = document.getElementById(`feedback-${productId}`);
-  feedback.textContent = `${quantity} × ${product.name} added to your cart.`;
-  window.setTimeout(() => { if (feedback) feedback.textContent = ''; }, 2600);
 }
 
 function handleCartClick(event) {
@@ -631,8 +853,14 @@ function renderCart() {
 
   elements.cartCount.textContent = String(itemCount);
   elements.cartCount.setAttribute('aria-label', `${itemCount} item${itemCount === 1 ? '' : 's'} in cart`);
-  elements.emptyCartMessage.hidden = detailedLines.length > 0;
-  elements.cartFooter.hidden = detailedLines.length === 0;
+  const cartHasItems = detailedLines.length > 0;
+  // Keep both the semantic hidden state and an explicit display state. This prevents
+  // any cached or older stylesheet rule from leaving the empty message visible over
+  // real cart lines after an item is added.
+  elements.emptyCartMessage.hidden = cartHasItems;
+  elements.emptyCartMessage.style.display = cartHasItems ? 'none' : '';
+  elements.emptyCartMessage.setAttribute('aria-hidden', String(cartHasItems));
+  elements.cartFooter.hidden = !cartHasItems;
   elements.cartAvailabilityStatus.hidden = unavailableLines.length === 0;
   elements.cartAvailabilityStatus.textContent = unavailableLines.length === 0
     ? ''

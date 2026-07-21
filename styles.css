@@ -230,6 +230,8 @@ h3 { font-size: 1.2rem; margin-bottom: 0.65rem; }
 .product-price { color: var(--espresso-900); font-weight: 900; white-space: nowrap; }
 .product-controls { margin-top: auto; display: grid; gap: 13px; }
 .option-row { display: grid; grid-template-columns: 1fr 122px; gap: 12px; align-items: end; }
+.drink-add-on { display: grid; gap: 0; }
+.drink-add-on .field-label span { color: var(--muted); font-weight: 700; }
 .field-label { display: block; margin-bottom: 6px; color: var(--espresso-800); font-size: 0.82rem; font-weight: 800; }
 .select-control { width: 100%; min-height: 46px; border: 1px solid var(--border); border-radius: 12px; padding: 0 38px 0 12px; background: var(--white); color: var(--ink); }
 .quantity-control { min-height: 46px; display: grid; grid-template-columns: 38px 1fr 38px; align-items: center; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: var(--white); }
@@ -290,6 +292,7 @@ h3 { font-size: 1.2rem; margin-bottom: 0.65rem; }
 .cart-quantity { width: 118px; min-height: 44px; }
 .remove-button { min-height: 44px; display: inline-flex; align-items: center; border: 0; background: transparent; color: var(--danger); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
 .empty-cart { min-height: 52vh; display: grid; place-items: center; align-content: center; text-align: center; color: var(--muted); }
+.empty-cart[hidden] { display: none; }
 .empty-cart > span { font-size: 2.7rem; }
 .empty-cart h3 { margin: 10px 0 6px; }
 .cart-footer { padding: 18px 22px 22px; border-top: 1px solid var(--border); background: var(--cream-50); }
