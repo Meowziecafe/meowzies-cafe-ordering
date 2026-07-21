@@ -4,15 +4,15 @@ This folder contains a complete static website built with plain HTML, CSS, and J
 
 ## Safety status before launch
 
-The starter package is intentionally **not ready to take live money yet**. Before launch, you must:
+The repository contains an operational-looking public Formspree endpoint, GCash account display values, and a supplied GCash QR image. Those values were preserved, but this audit did not send a live order, scan the QR in GCash, or send real money. Before launch, you must:
 
-1. Replace `YOUR_FORM_ID` in `script.js` with a real Formspree form ID.
-2. Replace the GCash account-name and number placeholders in `script.js`.
-3. Replace `images/gcash-qr-placeholder.png` with the real, tested QR image.
+1. Confirm the configured Formspree form is owned by the café and sends notifications to the intended order email.
+2. Confirm the displayed GCash account name and number are current.
+3. Scan `images/gcash-qr.png` on another device and confirm the intended recipient before sending a controlled test payment.
 4. Replace the contact and business-information placeholders in `index.html`.
-5. Test the entire order path with a small test order.
+5. Perform an explicitly authorized end-to-end test order and controlled payment before public launch.
 
-The actual GCash QR image supplied during planning was deliberately not bundled into this starter package, so a draft or test deployment cannot accidentally direct customers to a live payment account.
+The checkout QR is a crop-only PNG made from the supplied screenshot so the code is large enough to display clearly. The untouched source screenshot is retained at `qa/evidence/gcash-qr-source.jpg`. The website still treats payment as pending until café staff manually verify receipt.
 
 ## Folder structure
 
@@ -27,7 +27,7 @@ meowzies-cafe-website/
     ├── logo.png
     ├── hero-kanlaon.jpg
     ├── drinks-menu-reference.jpg
-    ├── gcash-qr-placeholder.png
+    ├── gcash-qr.png
     ├── generic-drink.jpg
     ├── vanilla-latte.jpg
     ├── caramel-latte.jpg
@@ -55,6 +55,12 @@ meowzies-cafe-website/
 
 The same pending order number is reused on retry. This helps staff recognize a duplicate if Formspree received the first request but the customer’s connection failed before the success response returned.
 
+## Privacy and public configuration
+
+The cart and unfinished checkout form are saved in browser local storage so a refresh or failed submission does not erase the order. This includes the customer’s entered delivery and GCash-reference details. The data stays on that browser until the customer clears the saved checkout details or a successful submission clears it automatically. Customers using a shared device should use **Clear saved checkout details** before leaving. The website does not place customer details in the page URL or intentionally write them to the browser console.
+
+The Formspree form ID, displayed GCash account name/number, and QR code are public website configuration, not private authentication secrets. Email passwords, GCash credentials, MPINs, OTPs, private API keys, and private tokens must never be added to this repository. The public values still require owner verification before launch, and payment remains pending until café staff manually confirm receipt.
+
 ## Open the website locally on Windows
 
 1. Extract the ZIP file.
@@ -62,7 +68,7 @@ The same pending order number is reused on retry. This helps staff recognize a d
 3. Double-click `index.html`.
 4. The website should open in your default browser.
 5. Add a drink to the cart, refresh the page, and confirm the cart remains.
-6. Open checkout. A deliberate configuration warning will appear if you try to submit before setting up Formspree and GCash.
+6. Open checkout and verify the order summary, manual-verification warnings, and preserved draft behavior. Do not submit the public endpoint during an ordinary local test.
 
 For easier editing, install Visual Studio Code, then choose **File → Open Folder** and select this project folder.
 
@@ -86,14 +92,14 @@ Formspree’s current dashboard labels may change slightly, but the general setu
 4. Name the form something obvious, such as `Meowzie’s Cafe Orders`.
 5. Open the form’s integration/setup page.
 6. Copy the form ID or endpoint. It normally looks like `https://formspree.io/f/abcxyzde`.
-7. Open `script.js`.
-8. Near the top, find:
+7. The repository currently contains a public Formspree endpoint identifier. Confirm ownership and notification routing in the Formspree dashboard before launch.
+8. If the café owner intentionally replaces that endpoint, open `script.js` and find:
 
    ```js
    formEndpoint: 'https://formspree.io/f/YOUR_FORM_ID',
    ```
 
-9. Replace only `YOUR_FORM_ID` with your real form ID.
+9. Replace only `YOUR_FORM_ID` in that example shape with the verified replacement form ID.
 10. Save the file.
 11. In the Formspree dashboard, confirm email notifications are enabled for the café’s order email.
 12. Submit a test order with the customer name `TEST ORDER — DO NOT PREPARE` and a GCash reference such as `TEST-000001` only after temporarily using a test-safe payment flow. Never claim to have paid when no test payment was sent.
@@ -102,14 +108,14 @@ Formspree’s Free tier currently starts at 50 submissions per month, can link u
 
 ## Configure GCash
 
-Open `script.js` and replace:
+The current account display values are configured near the top of `script.js`. Change them only when the café owner has verified replacement details:
 
 ```js
-gcashAccountName: '[ADD GCASH ACCOUNT NAME]',
-gcashAccountNumber: '[ADD GCASH MOBILE NUMBER]'
+gcashAccountName: 'VERIFIED ACCOUNT NAME',
+gcashAccountNumber: 'VERIFIED ACCOUNT NUMBER'
 ```
 
-Then replace `images/gcash-qr-placeholder.png` with the real QR image while keeping the exact filename `gcash-qr-placeholder.png`. Keeping the filename means no code change is needed.
+Replace `images/gcash-qr.png` only with a verified replacement QR image while keeping the exact filename `gcash-qr.png`. Keeping the filename means no code change is needed.
 
 Use a sharp PNG or high-quality JPG. Keep the full quiet white border around the QR code. Do not crop into the square modules. Test the published QR with a different phone before accepting orders.
 
@@ -203,7 +209,7 @@ For easier full-commit reversal, install GitHub Desktop. In its **History** tab,
 - [ ] Increase and decrease quantity.
 - [ ] Remove a product.
 - [ ] Refresh the page and confirm the cart remains.
-- [ ] Delivery fee is ₱29 whenever at least one product is present.
+- [ ] Delivery fee is ₱49 whenever at least one product is present.
 - [ ] An empty cart does not charge a delivery fee.
 
 ### Sample calculation
@@ -215,8 +221,8 @@ Add:
 - 1 × Hot Chocolate, 8 oz: ₱49
 
 Expected subtotal: **₱318**  
-Delivery fee: **₱29**  
-Expected final total: **₱347**
+Delivery fee: **₱49**
+Expected final total: **₱367**
 
 ### Checkout validation
 
@@ -250,7 +256,7 @@ After Formspree is configured, temporarily disconnect the internet immediately b
 
 - [ ] Formspree receives the order.
 - [ ] Notification email arrives.
-- [ ] Email includes order number, date/time, customer details, every item, size, quantity, unit price, subtotal, ₱29 delivery fee, total, GCash sender, reference, and notes.
+- [ ] Email includes order number, date/time, customer details, every item, size, quantity, unit price, subtotal, ₱49 delivery fee, total, GCash sender, reference, and notes.
 - [ ] Confirmation screen shows the same order number.
 - [ ] Confirmation says payment is pending manual verification.
 - [ ] Cart clears only after the successful response.
@@ -311,14 +317,14 @@ File: `script.js`
 Near the top:
 
 ```js
-deliveryFee: 29,
+deliveryFee: 49,
 ```
 
-Change only the number. The current official requirement is exactly ₱29.
+Change only the number. The current official delivery fee is ₱49.
 
 ### Change GCash QR
 
-Replace `images/gcash-qr-placeholder.png` with the new image using the exact same filename.
+Replace `images/gcash-qr.png` with the verified new image using the exact same filename.
 
 ### Change café email
 
@@ -336,5 +342,4 @@ Set `featured: true` on the three drinks you want. Set it to `false` on the othe
 
 ## Product photography
 
-The bundled JPG files are polished temporary illustrations, not real product photos. See `IMAGE-PROMPTS.md` for consistent generation prompts and exact filenames. Replace each file while preserving its filename to avoid editing code.
-
+The product JPG files are the local high-quality fallbacks. Responsive 480, 800, and 1200-pixel WebP versions are generated for faster loading. If a product photograph changes, regenerate the responsive variants with the command documented in `qa/README.md`.

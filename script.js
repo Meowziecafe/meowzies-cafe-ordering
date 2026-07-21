@@ -5,7 +5,7 @@
   IMPORTANT OWNER EDITS:
   1. Replace formEndpoint with your Formspree endpoint.
   2. Replace gcashAccountName and gcashAccountNumber.
-  3. Keep deliveryFee at 29 unless you intentionally change the business policy.
+  3. Keep deliveryFee at 49 unless you intentionally change the business policy.
   4. Product names, prices, availability, descriptions, and images are in PRODUCTS below.
 */
 
@@ -32,7 +32,7 @@ const PRODUCTS = Object.freeze([
     menuGroup: 'drinks',
     description: 'Smooth iced coffee with creamy milk and a mellow vanilla finish.',
     image: 'images/vanilla-latte.jpg',
-    imageAlt: 'Temporary product image for Vanilla Latte',
+    imageAlt: 'Iced Vanilla Latte in a clear cup',
     featured: true,
     favorite: false,
     available: true,
@@ -49,7 +49,7 @@ const PRODUCTS = Object.freeze([
     menuGroup: 'drinks',
     description: 'Iced coffee and milk balanced with rich, buttery caramel notes.',
     image: 'images/caramel-latte.jpg',
-    imageAlt: 'Temporary product image for Caramel Latte',
+    imageAlt: 'Iced Caramel Latte with caramel ribbons in a clear cup',
     featured: false,
     favorite: false,
     available: true,
@@ -66,7 +66,7 @@ const PRODUCTS = Object.freeze([
     menuGroup: 'drinks',
     description: 'A creamy iced latte with warm, lightly toasted hazelnut flavor.',
     image: 'images/hazelnut-latte.jpg',
-    imageAlt: 'Temporary product image for Hazelnut Latte',
+    imageAlt: 'Iced Hazelnut Latte in a clear cup',
     featured: false,
     favorite: false,
     available: true,
@@ -83,7 +83,7 @@ const PRODUCTS = Object.freeze([
     menuGroup: 'drinks',
     description: 'A sweeter, full-bodied iced latte with a velvety milk profile.',
     image: 'images/spanish-latte.jpg',
-    imageAlt: 'Temporary product image for Spanish Latte',
+    imageAlt: 'Iced Spanish Latte with creamy espresso layers in a clear cup',
     featured: true,
     favorite: false,
     available: true,
@@ -100,7 +100,7 @@ const PRODUCTS = Object.freeze([
     menuGroup: 'drinks',
     description: 'Earthy matcha blended with chilled milk for a creamy green tea drink.',
     image: 'images/matcha-latte.jpg',
-    imageAlt: 'Temporary product image for Matcha Latte',
+    imageAlt: 'Iced Matcha Latte in a clear cup',
     featured: false,
     favorite: false,
     available: true,
@@ -117,7 +117,7 @@ const PRODUCTS = Object.freeze([
     menuGroup: 'drinks',
     description: 'A creamy 22 oz milk tea with a familiar, comforting tea flavor.',
     image: 'images/classic-milk-tea.jpg',
-    imageAlt: 'Temporary product image for Classic Milk Tea',
+    imageAlt: 'Classic Milk Tea with tapioca pearls in a clear cup',
     featured: false,
     favorite: false,
     available: true,
@@ -131,7 +131,7 @@ const PRODUCTS = Object.freeze([
     menuGroup: 'drinks',
     description: 'A creamy 22 oz purple milk tea with sweet ube and taro-inspired flavor.',
     image: 'images/ube-taro-milk-tea.jpg',
-    imageAlt: 'Temporary product image for Ube Taro Milk Tea',
+    imageAlt: 'Ube Taro Milk Tea with tapioca pearls in a clear cup',
     featured: false,
     favorite: false,
     available: true,
@@ -145,7 +145,7 @@ const PRODUCTS = Object.freeze([
     menuGroup: 'drinks',
     description: 'A bold and creamy 22 oz Thai tea with its signature orange color.',
     image: 'images/thai-tea.jpg',
-    imageAlt: 'Temporary product image for Thai Tea',
+    imageAlt: 'Thai Tea with a creamy milk swirl in a clear cup',
     featured: true,
     favorite: true,
     available: true,
@@ -159,7 +159,7 @@ const PRODUCTS = Object.freeze([
     menuGroup: 'drinks',
     description: 'A chilled 12 oz chocolate drink finished with a creamy float topping.',
     image: 'images/chuckie-float.jpg',
-    imageAlt: 'Temporary product image for Chuckie Float',
+    imageAlt: 'Chocolate float with vanilla ice cream in a clear cup',
     featured: false,
     favorite: false,
     available: true,
@@ -173,7 +173,7 @@ const PRODUCTS = Object.freeze([
     menuGroup: 'drinks',
     description: 'A refreshing 12 oz cola drink topped with a creamy scoop-style float.',
     image: 'images/coke-float.jpg',
-    imageAlt: 'Temporary product image for Coke Float',
+    imageAlt: 'Cola float with vanilla ice cream in a clear cup',
     featured: false,
     favorite: false,
     available: true,
@@ -187,7 +187,7 @@ const PRODUCTS = Object.freeze([
     menuGroup: 'drinks',
     description: 'A simple 8 oz hot coffee highlighting the café’s local coffee character.',
     image: 'images/hot-coffee.jpg',
-    imageAlt: 'Temporary product image for Hot Coffee',
+    imageAlt: 'Black hot coffee in a cream ceramic cup',
     featured: false,
     favorite: false,
     available: true,
@@ -201,7 +201,7 @@ const PRODUCTS = Object.freeze([
     menuGroup: 'drinks',
     description: 'An 8 oz hot coffee softened with milk for a smoother, gentler cup.',
     image: 'images/hot-coffee-with-milk.jpg',
-    imageAlt: 'Temporary product image for Hot Coffee with Milk',
+    imageAlt: 'Hot coffee with milk in a cream ceramic cup',
     featured: false,
     favorite: false,
     available: true,
@@ -215,7 +215,7 @@ const PRODUCTS = Object.freeze([
     menuGroup: 'drinks',
     description: 'A warm and comforting 8 oz chocolate drink with a creamy finish.',
     image: 'images/hot-chocolate.jpg',
-    imageAlt: 'Temporary product image for Hot Chocolate',
+    imageAlt: 'Hot chocolate with a cream swirl in a cream ceramic cup',
     featured: false,
     favorite: false,
     available: true,
@@ -344,7 +344,8 @@ const state = {
   cart: readJson(STORAGE_KEYS.cart, []),
   activeCategory: 'all',
   isSubmitting: false,
-  lastFocusedElement: null,
+  cartReturnFocusElement: null,
+  checkoutReturnFocusElement: null,
   toastTimer: null
 };
 
@@ -366,15 +367,15 @@ function init() {
 function cacheElements() {
   const ids = [
     'navToggle', 'primaryNav', 'openCartButton', 'menuCartButton', 'cartCount',
-    'categoryFilters', 'productGrid', 'featuredGrid', 'cartBackdrop', 'cartDrawer',
+    'categoryFilters', 'menuStatus', 'productGrid', 'featuredGrid', 'cartBackdrop', 'cartDrawer',
     'closeCartButton', 'cartItems', 'emptyCartMessage', 'cartFooter', 'cartSubtotal',
-    'cartDelivery', 'cartTotal', 'continueShoppingButton', 'checkoutButton',
+    'cartDelivery', 'cartTotal', 'cartAvailabilityStatus', 'continueShoppingButton', 'checkoutButton',
     'checkoutDialog', 'closeCheckoutButton', 'checkoutOrderNumber', 'checkoutForm',
     'checkoutItems', 'checkoutSubtotal', 'checkoutDelivery', 'checkoutTotal',
     'gcashTotal', 'confirmationTotal', 'gcashAccountName', 'gcashAccountNumber',
     'submissionStatus', 'submitOrderButton', 'backToCartButton', 'checkoutFormView',
     'confirmationView', 'confirmationOrderNumber', 'finishOrderButton', 'toast',
-    'mobileNumber', 'mobileNumberError'
+    'mobileNumber', 'mobileNumberError', 'clearCheckoutDraftButton'
   ];
 
   for (const id of ids) elements[id] = document.getElementById(id);
@@ -384,8 +385,8 @@ function bindEvents() {
   elements.navToggle.addEventListener('click', toggleNavigation);
   elements.primaryNav.addEventListener('click', () => closeNavigation());
 
-  elements.openCartButton.addEventListener('click', openCart);
-  elements.menuCartButton.addEventListener('click', openCart);
+  elements.openCartButton.addEventListener('click', () => openCart());
+  elements.menuCartButton.addEventListener('click', () => openCart());
   elements.closeCartButton.addEventListener('click', closeCart);
   elements.cartBackdrop.addEventListener('click', closeCart);
   elements.continueShoppingButton.addEventListener('click', () => {
@@ -401,9 +402,11 @@ function bindEvents() {
   elements.checkoutButton.addEventListener('click', openCheckout);
   elements.closeCheckoutButton.addEventListener('click', closeCheckout);
   elements.backToCartButton.addEventListener('click', () => {
-    closeCheckout();
-    openCart();
+    const returnFocusElement = state.checkoutReturnFocusElement;
+    closeCheckout({ restoreFocus: false });
+    openCart({ returnFocusElement });
   });
+  elements.clearCheckoutDraftButton.addEventListener('click', clearCheckoutDraft);
   elements.finishOrderButton.addEventListener('click', finishOrderFlow);
   elements.checkoutForm.addEventListener('input', saveCheckoutDraft);
   elements.checkoutForm.addEventListener('change', saveCheckoutDraft);
@@ -441,7 +444,7 @@ function renderFeaturedProducts() {
     const lowestPrice = Math.min(...product.variants.map((variant) => variant.price));
     return `
       <article class="featured-card">
-        <img src="${product.image}" alt="${product.imageAlt}" loading="lazy" data-fallback-image>
+        <img src="${product.image}" ${buildResponsiveImageAttributes(product.image, '(max-width: 760px) calc(100vw - 24px), (max-width: 980px) calc((100vw - 52px) / 2), 380px')} alt="${product.imageAlt}" width="1200" height="900" loading="lazy" decoding="async" data-fallback-image>
         <div class="featured-card-body">
           <p class="product-category">${product.categoryLabel}</p>
           <h3>${product.name}</h3>
@@ -461,23 +464,26 @@ function renderProducts() {
     return product.category === state.activeCategory;
   });
 
-   elements.productGrid.innerHTML = visibleProducts.map((product) => {
+  elements.productGrid.innerHTML = visibleProducts.map((product) => {
     const defaultVariant = product.variants[0];
     const hasMultipleVariants = product.variants.length > 1;
-    const badge = product.favorite
-      ? '<span class="product-badge"><span aria-hidden="true">🐾</span> Meowzie’s Favorite</span>'
-      : (!product.available ? '<span class="product-badge unavailable-badge">Unavailable</span>' : '');
+    const optionLabel = product.menuGroup === 'food' ? 'Option' : 'Size';
+    const badge = !product.available
+      ? '<span class="product-badge unavailable-badge">Unavailable</span>'
+      : (product.favorite ? '<span class="product-badge"><span aria-hidden="true">🐾</span> Meowzie’s Favorite</span>' : '');
 
     const variantControl = hasMultipleVariants
-      ? `<select class="select-control product-variant" id="variant-${product.id}" data-product-id="${product.id}" aria-label="Size for ${product.name}">
+      ? `<label class="field-label" for="variant-${product.id}">${optionLabel}</label>
+        <select class="select-control product-variant" id="variant-${product.id}" data-product-id="${product.id}" aria-label="${optionLabel} for ${product.name}">
           ${product.variants.map((variant) => `<option value="${variant.id}" data-price="${variant.price}">${variant.label} — ${formatPeso(variant.price)}</option>`).join('')}
         </select>`
-      : `<div class="select-control" id="variant-${product.id}" aria-label="Size ${defaultVariant.label}">${defaultVariant.label}</div>`;
+      : `<span class="field-label" id="variant-label-${product.id}">${optionLabel}</span>
+        <div class="select-control" id="variant-${product.id}" aria-label="${optionLabel}: ${defaultVariant.label}">${defaultVariant.label}</div>`;
 
     return `
-      <article class="product-card ${product.available ? '' : 'is-unavailable'}" data-product-card="${product.id}">
+      <article class="product-card ${product.menuGroup === 'drinks' ? 'product-card-drink' : ''} ${product.available ? '' : 'is-unavailable'}" data-product-card="${product.id}">
         <div class="product-image-wrap">
-          <img src="${product.image}" alt="${product.imageAlt}" class="product-image" loading="lazy" data-fallback-image>
+          <img src="${product.image}" ${buildResponsiveImageAttributes(product.image, '(max-width: 760px) calc(100vw - 24px), (max-width: 980px) calc((100vw - 54px) / 2), 379px')} alt="${product.imageAlt}" class="product-image" width="1200" height="900" loading="lazy" decoding="async" data-fallback-image>
           ${badge}
         </div>
         <div class="product-body">
@@ -492,7 +498,6 @@ function renderProducts() {
           <div class="product-controls">
             <div class="option-row">
               <div>
-                <label class="field-label" for="variant-${product.id}">${product.category === 'food' ? 'Option' : 'Size'}</label>
                 ${variantControl}
               </div>
               <div class="quantity-block">
@@ -514,6 +519,9 @@ function renderProducts() {
   }).join('');
 
   installImageFallbacks(elements.productGrid);
+  const activeFilter = elements.categoryFilters.querySelector('[aria-pressed="true"]');
+  const filterLabel = activeFilter?.textContent.trim() || 'All';
+  elements.menuStatus.textContent = `${visibleProducts.length} menu item${visibleProducts.length === 1 ? '' : 's'} shown for ${filterLabel}.`;
 }
 
 function handleCategoryFilter(event) {
@@ -558,8 +566,8 @@ function addProductFromCard(productId) {
 
   const variantSelect = document.getElementById(`variant-${productId}`);
   const variantId = variantSelect?.matches('select')
-  ? variantSelect.value
-  : product.variants[0].id;
+    ? variantSelect.value
+    : product.variants[0].id;
   const quantityInput = document.getElementById(`quantity-${productId}`);
   const quantity = clampNumber(Number(quantityInput.value), 1, 20);
   const lineId = makeLineId(productId, variantId);
@@ -578,7 +586,6 @@ function addProductFromCard(productId) {
   const feedback = document.getElementById(`feedback-${productId}`);
   feedback.textContent = `${quantity} × ${product.name} added to your cart.`;
   window.setTimeout(() => { if (feedback) feedback.textContent = ''; }, 2600);
-  showToast(`${product.name} added to cart`);
 }
 
 function handleCartClick(event) {
@@ -587,6 +594,7 @@ function handleCartClick(event) {
 
   const lineId = button.dataset.lineId;
   const action = button.dataset.cartAction;
+  const lineIndex = state.cart.findIndex((item) => item.lineId === lineId);
   const line = state.cart.find((item) => item.lineId === lineId);
   if (!line) return;
 
@@ -596,28 +604,51 @@ function handleCartClick(event) {
 
   saveCart();
   renderCart();
+  if (event.detail === 0) restoreCartMutationFocus({ action, lineId, lineIndex });
+}
+
+function restoreCartMutationFocus({ action, lineId, lineIndex }) {
+  const actionButtons = [...elements.cartItems.querySelectorAll('[data-cart-action]')];
+  let target = null;
+
+  if (action !== 'remove') {
+    target = actionButtons.find((button) => button.dataset.cartAction === action && button.dataset.lineId === lineId);
+  } else if (state.cart.length > 0) {
+    const adjacentLine = state.cart[Math.min(lineIndex, state.cart.length - 1)];
+    target = actionButtons.find((button) => button.dataset.cartAction === 'remove' && button.dataset.lineId === adjacentLine.lineId);
+  } else {
+    target = elements.continueShoppingButton.hidden ? elements.closeCartButton : elements.continueShoppingButton;
+  }
+
+  if (typeof target?.focus === 'function') target.focus();
 }
 
 function renderCart() {
   const detailedLines = getDetailedCartLines();
+  const unavailableLines = getUnavailableCartLines(detailedLines);
   const itemCount = detailedLines.reduce((sum, line) => sum + line.quantity, 0);
-  const subtotal = calculateSubtotal(detailedLines);
-  const delivery = itemCount > 0 ? CONFIG.deliveryFee : 0;
-  const total = subtotal + delivery;
+  const { subtotal, delivery, total } = calculateCartTotals(detailedLines);
 
   elements.cartCount.textContent = String(itemCount);
   elements.cartCount.setAttribute('aria-label', `${itemCount} item${itemCount === 1 ? '' : 's'} in cart`);
   elements.emptyCartMessage.hidden = detailedLines.length > 0;
   elements.cartFooter.hidden = detailedLines.length === 0;
+  elements.cartAvailabilityStatus.hidden = unavailableLines.length === 0;
+  elements.cartAvailabilityStatus.textContent = unavailableLines.length === 0
+    ? ''
+    : `${unavailableLines.length} cart item${unavailableLines.length === 1 ? ' is' : 's are'} currently unavailable. Remove ${unavailableLines.length === 1 ? 'it' : 'them'} before checkout.`;
+  elements.checkoutButton.disabled = unavailableLines.length > 0;
+  elements.checkoutButton.setAttribute('aria-disabled', String(unavailableLines.length > 0));
 
   elements.cartItems.innerHTML = detailedLines.map((line) => `
-    <article class="cart-item">
-      <img src="${line.product.image}" alt="${line.product.imageAlt}" loading="lazy" data-fallback-image>
+    <article class="cart-item ${line.product.available ? '' : 'is-unavailable'}" ${line.product.available ? '' : 'aria-label="Currently unavailable item"'}>
+      <img src="${line.product.image}" ${buildResponsiveImageAttributes(line.product.image, '(max-width: 430px) 62px, 74px')} alt="${line.product.imageAlt}" width="1200" height="900" loading="lazy" decoding="async" data-fallback-image>
       <div>
         <div class="cart-item-top">
           <div>
             <h3>${line.product.name}</h3>
             <p class="cart-item-meta">${line.variant.label} · ${formatPeso(line.variant.price)} each</p>
+            ${line.product.available ? '' : '<p class="cart-item-warning">Currently unavailable — remove this item to continue.</p>'}
           </div>
           <strong>${formatPeso(line.variant.price * line.quantity)}</strong>
         </div>
@@ -627,7 +658,7 @@ function renderCart() {
             <span aria-label="Quantity ${line.quantity}">${line.quantity}</span>
             <button type="button" data-cart-action="increase" data-line-id="${line.lineId}" aria-label="Increase ${line.product.name} quantity">+</button>
           </div>
-          <button class="remove-button" type="button" data-cart-action="remove" data-line-id="${line.lineId}">Remove</button>
+          <button class="remove-button" type="button" data-cart-action="remove" data-line-id="${line.lineId}" aria-label="Remove ${line.product.name}, ${line.variant.label}, from cart">Remove</button>
         </div>
       </div>
     </article>`).join('');
@@ -640,13 +671,15 @@ function renderCart() {
   if (isCheckoutOpen() && detailedLines.length > 0) renderCheckoutSummary();
 }
 
-function openCart() {
+function openCart({ returnFocusElement = document.activeElement } = {}) {
   closeNavigation();
-  state.lastFocusedElement = document.activeElement;
+  state.cartReturnFocusElement = returnFocusElement;
   elements.cartBackdrop.hidden = false;
   elements.cartDrawer.classList.add('is-open');
   elements.cartDrawer.setAttribute('aria-hidden', 'false');
   elements.openCartButton.setAttribute('aria-expanded', 'true');
+  elements.menuCartButton.setAttribute('aria-expanded', 'true');
+  setPageInert(true);
   document.body.classList.add('no-scroll');
   window.setTimeout(() => elements.closeCartButton.focus(), 30);
 }
@@ -655,19 +688,29 @@ function closeCart({ restoreFocus = true } = {}) {
   elements.cartDrawer.classList.remove('is-open');
   elements.cartDrawer.setAttribute('aria-hidden', 'true');
   elements.openCartButton.setAttribute('aria-expanded', 'false');
+  elements.menuCartButton.setAttribute('aria-expanded', 'false');
   elements.cartBackdrop.hidden = true;
+  setPageInert(false);
   document.body.classList.remove('no-scroll');
-  if (restoreFocus && state.lastFocusedElement instanceof HTMLElement) state.lastFocusedElement.focus();
+  if (restoreFocus && state.cartReturnFocusElement instanceof HTMLElement) state.cartReturnFocusElement.focus();
 }
 
 function openCheckout() {
-  if (state.cart.length === 0) {
+  const detailedLines = getDetailedCartLines();
+  if (detailedLines.length === 0) {
     showToast('Add at least one item before checkout');
     return;
   }
 
+  if (hasUnavailableCartItems(detailedLines)) {
+    showToast('Remove unavailable items before checkout');
+    return;
+  }
+
+  state.checkoutReturnFocusElement = state.cartReturnFocusElement instanceof HTMLElement
+    ? state.cartReturnFocusElement
+    : elements.openCartButton;
   closeCart({ restoreFocus: false });
-  state.lastFocusedElement = document.activeElement;
   showCheckoutFormView();
   const orderNumber = getOrCreatePendingOrderNumber();
   elements.checkoutOrderNumber.textContent = orderNumber;
@@ -680,24 +723,24 @@ function openCheckout() {
   } else {
     elements.checkoutDialog.setAttribute('open', '');
   }
+  setPageInert(true);
   document.body.classList.add('no-scroll');
   window.setTimeout(() => document.getElementById('fullName').focus(), 30);
 }
 
-function closeCheckout() {
+function closeCheckout({ restoreFocus = true } = {}) {
   if (state.isSubmitting) return;
   saveCheckoutDraft();
   if (typeof elements.checkoutDialog.close === 'function') elements.checkoutDialog.close();
   else elements.checkoutDialog.removeAttribute('open');
+  setPageInert(false);
   document.body.classList.remove('no-scroll');
-  if (state.lastFocusedElement instanceof HTMLElement) state.lastFocusedElement.focus();
+  if (restoreFocus && state.checkoutReturnFocusElement instanceof HTMLElement) state.checkoutReturnFocusElement.focus();
 }
 
 function renderCheckoutSummary() {
   const lines = getDetailedCartLines();
-  const subtotal = calculateSubtotal(lines);
-  const delivery = lines.length > 0 ? CONFIG.deliveryFee : 0;
-  const total = subtotal + delivery;
+  const { subtotal, delivery, total } = calculateCartTotals(lines);
 
   elements.checkoutItems.innerHTML = lines.map((line) => `
     <div class="checkout-item">
@@ -720,9 +763,17 @@ async function submitOrder(event) {
   if (state.isSubmitting) return;
 
   elements.submissionStatus.textContent = '';
+  saveCheckoutDraft();
 
-  if (state.cart.length === 0) {
-    elements.submissionStatus.textContent = 'Your cart is empty. Return to the menu and add at least one item.';
+  const detailedLines = getDetailedCartLines();
+  if (detailedLines.length === 0) {
+    showSubmissionStatus('Your cart is empty. Return to the menu and add at least one item.', { focus: true });
+    return;
+  }
+
+  if (hasUnavailableCartItems(detailedLines)) {
+    showSubmissionStatus('One or more items in your cart are currently unavailable. Remove those items before submitting. Your cart and form information have been preserved.', { focus: true });
+    renderCart();
     return;
   }
 
@@ -730,18 +781,18 @@ async function submitOrder(event) {
   if (!elements.checkoutForm.checkValidity() || !mobileIsValid) {
     markInvalidFields();
     elements.checkoutForm.reportValidity();
-    elements.submissionStatus.textContent = 'Please complete every required field and correct the highlighted information.';
+    showSubmissionStatus('Please complete every required field and correct the highlighted information.');
     focusFirstInvalidField();
     return;
   }
 
   if (!isFormServiceConfigured()) {
-    elements.submissionStatus.textContent = 'Order email service is not configured yet. The café owner must replace YOUR_FORM_ID in script.js before accepting live orders. Your cart and form information have been preserved.';
+    showSubmissionStatus('Order email service is not configured yet. The café owner must replace YOUR_FORM_ID in script.js before accepting live orders. Your cart and form information have been preserved.', { focus: true });
     return;
   }
 
   if (!isGcashConfigured()) {
-    elements.submissionStatus.textContent = 'The GCash account name or number is still a placeholder. The café owner must configure payment details before accepting live orders. Your cart and form information have been preserved.';
+    showSubmissionStatus('The GCash account name or number is still a placeholder. The café owner must configure payment details before accepting live orders. Your cart and form information have been preserved.', { focus: true });
     return;
   }
 
@@ -756,6 +807,8 @@ async function submitOrder(event) {
   state.isSubmitting = true;
   elements.submitOrderButton.disabled = true;
   elements.submitOrderButton.textContent = 'Submitting…';
+  if (typeof elements.checkoutForm.setAttribute === 'function') elements.checkoutForm.setAttribute('aria-busy', 'true');
+  showSubmissionStatus('Submitting your order for manual verification. Please wait.');
   saveCheckoutDraft();
 
   const formPayload = buildSubmissionFormData(orderNumber);
@@ -786,9 +839,10 @@ async function submitOrder(event) {
     showConfirmation(orderNumber);
     clearOrderAfterConfirmedSuccess();
   } catch (error) {
-    elements.submissionStatus.textContent = `${error.message || 'The order could not be submitted.'} Please check your connection and try again. Your cart and form information have not been deleted. Use the same order number on any retry.`;
+    showSubmissionStatus(`${error.message || 'The order could not be submitted.'} Please check your connection and try again. Your cart and form information have not been deleted. Use the same order number on any retry.`, { focus: true });
   } finally {
     state.isSubmitting = false;
+    if (typeof elements.checkoutForm.removeAttribute === 'function') elements.checkoutForm.removeAttribute('aria-busy');
     elements.submitOrderButton.disabled = false;
     elements.submitOrderButton.textContent = 'Submit order for verification';
   }
@@ -797,14 +851,13 @@ async function submitOrder(event) {
 function buildSubmissionFormData(orderNumber) {
   const formData = new FormData(elements.checkoutForm);
   const lines = getDetailedCartLines();
-  const subtotal = calculateSubtotal(lines);
-  const delivery = CONFIG.deliveryFee;
-  const total = subtotal + delivery;
+  const { subtotal, delivery, total } = calculateCartTotals(lines);
   const dateTime = getPhilippinesDateTime();
 
-  const itemLines = lines.map((line, index) =>
-    `${index + 1}. ${line.product.name} | Size: ${line.variant.label} | Qty: ${line.quantity} | Unit: ${formatPeso(line.variant.price)} | Line total: ${formatPeso(line.variant.price * line.quantity)}`
-  );
+  const itemLines = lines.map((line, index) => {
+    const optionName = line.product.menuGroup === 'food' ? 'Option' : 'Size';
+    return `${index + 1}. ${line.product.name} | ${optionName}: ${line.variant.label} | Qty: ${line.quantity} | Unit: ${formatPeso(line.variant.price)} | Line total: ${formatPeso(line.variant.price * line.quantity)}`;
+  });
 
   const readableOrder = [
     `Order number: ${orderNumber}`,
@@ -873,6 +926,14 @@ function saveCheckoutDraft() {
   writeJson(STORAGE_KEYS.checkoutDraft, draft);
 }
 
+function clearCheckoutDraft() {
+  removeStoredValue(STORAGE_KEYS.checkoutDraft);
+  elements.checkoutForm.reset();
+  clearInvalidMarks();
+  showSubmissionStatus('Saved checkout details cleared. Your cart was not changed.');
+  document.getElementById('fullName').focus();
+}
+
 function restoreCheckoutDraft() {
   if (!elements.checkoutForm) return;
   const draft = readJson(STORAGE_KEYS.checkoutDraft, {});
@@ -925,6 +986,11 @@ function focusFirstInvalidField() {
   if (invalid) invalid.focus();
 }
 
+function showSubmissionStatus(message, { focus = false } = {}) {
+  elements.submissionStatus.textContent = message;
+  if (focus && typeof elements.submissionStatus.focus === 'function') elements.submissionStatus.focus();
+}
+
 function getDetailedCartLines() {
   return state.cart.map((line) => {
     const product = getProduct(line.productId);
@@ -939,8 +1005,26 @@ function calculateSubtotal(lines = getDetailedCartLines()) {
   return lines.reduce((sum, line) => sum + (line.variant.price * line.quantity), 0);
 }
 
+function calculateCartTotals(lines = getDetailedCartLines()) {
+  const subtotal = calculateSubtotal(lines);
+  const delivery = lines.length > 0 ? CONFIG.deliveryFee : 0;
+  return { subtotal, delivery, total: subtotal + delivery };
+}
+
+function getUnavailableCartLines(lines = getDetailedCartLines()) {
+  return lines.filter((line) => !line.product.available);
+}
+
+function hasUnavailableCartItems(lines = getDetailedCartLines()) {
+  return getUnavailableCartLines(lines).length > 0;
+}
+
+function canCheckoutCart(lines = getDetailedCartLines()) {
+  return lines.length > 0 && !hasUnavailableCartItems(lines);
+}
+
 function sanitizeStoredCart() {
-  state.cart = Array.isArray(state.cart)
+  const validLines = Array.isArray(state.cart)
     ? state.cart.filter((line) => {
         const product = getProduct(line.productId);
         const variant = product ? getVariant(product, line.variantId) : null;
@@ -952,6 +1036,15 @@ function sanitizeStoredCart() {
         quantity: clampNumber(Number(line.quantity), 1, 99)
       }))
     : [];
+
+  const mergedLines = new Map();
+  for (const line of validLines) {
+    const existing = mergedLines.get(line.lineId);
+    if (existing) existing.quantity = clampNumber(existing.quantity + line.quantity, 1, 99);
+    else mergedLines.set(line.lineId, line);
+  }
+
+  state.cart = [...mergedLines.values()];
   saveCart();
 }
 
@@ -1034,16 +1127,77 @@ function toggleNavigation() {
   const isOpen = elements.primaryNav.classList.toggle('is-open');
   elements.navToggle.setAttribute('aria-expanded', String(isOpen));
   elements.navToggle.querySelector('[aria-hidden="true"]').textContent = isOpen ? '×' : '☰';
+  elements.navToggle.querySelector('.sr-only').textContent = isOpen ? 'Close navigation' : 'Open navigation';
 }
 
-function closeNavigation() {
+function closeNavigation({ restoreFocus = false } = {}) {
+  const wasOpen = elements.primaryNav.classList.contains('is-open');
   elements.primaryNav.classList.remove('is-open');
   elements.navToggle.setAttribute('aria-expanded', 'false');
   elements.navToggle.querySelector('[aria-hidden="true"]').textContent = '☰';
+  elements.navToggle.querySelector('.sr-only').textContent = 'Open navigation';
+  if (restoreFocus && wasOpen) elements.navToggle.focus();
 }
 
 function handleGlobalKeydown(event) {
-  if (event.key === 'Escape' && elements.cartDrawer.classList.contains('is-open')) closeCart();
+  if (event.key === 'Escape' && elements.cartDrawer.classList.contains('is-open')) {
+    event.preventDefault();
+    closeCart();
+    return;
+  }
+
+  if (event.key === 'Escape' && elements.primaryNav.classList.contains('is-open')) {
+    event.preventDefault();
+    closeNavigation({ restoreFocus: true });
+    return;
+  }
+
+  if (event.key === 'Tab' && elements.cartDrawer.classList.contains('is-open')) {
+    trapFocusWithin(event, elements.cartDrawer);
+    return;
+  }
+
+  if (event.key === 'Tab' && isCheckoutOpen()) trapFocusWithin(event, elements.checkoutDialog);
+}
+
+function trapFocusWithin(event, container) {
+  const focusable = [...container.querySelectorAll(
+    'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+  )].filter((element) => !isElementUnavailableForFocus(element, container));
+
+  if (focusable.length === 0) {
+    event.preventDefault();
+    container.focus();
+    return;
+  }
+
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
+    first.focus();
+  }
+}
+
+function isElementUnavailableForFocus(element, boundary) {
+  let current = element;
+  while (current) {
+    if (current.disabled || current.hidden || current.getAttribute?.('aria-hidden') === 'true' || current.hasAttribute?.('hidden')) return true;
+    if (current === boundary) break;
+    current = current.parentElement;
+  }
+  return false;
+}
+
+function setPageInert(isInert) {
+  if (typeof document.querySelectorAll !== 'function') return;
+  for (const element of document.querySelectorAll('.site-header, main, .site-footer')) {
+    if (isInert) element.setAttribute('inert', '');
+    else element.removeAttribute('inert');
+  }
 }
 
 function showToast(message) {
@@ -1056,9 +1210,16 @@ function showToast(message) {
 function installImageFallbacks(container) {
   for (const image of container.querySelectorAll('[data-fallback-image]')) {
     image.addEventListener('error', () => {
+      image.removeAttribute('srcset');
+      image.removeAttribute('sizes');
       if (!image.src.endsWith('/images/generic-drink.jpg')) image.src = 'images/generic-drink.jpg';
     }, { once: true });
   }
+}
+
+function buildResponsiveImageAttributes(imagePath, sizes) {
+  const basePath = imagePath.replace(/\.[^./]+$/, '');
+  return `srcset="${basePath}-480.webp 480w, ${basePath}-800.webp 800w, ${basePath}-1200.webp 1200w" sizes="${sizes}"`;
 }
 
 function isCheckoutOpen() {
@@ -1102,4 +1263,3 @@ function removeStoredValue(key) {
   try { localStorage.removeItem(key); }
   catch (error) { console.warn(`Could not remove ${key}.`, error); }
 }
-

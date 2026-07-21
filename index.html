@@ -16,7 +16,7 @@
   <header class="site-header" id="top">
     <div class="container header-inner">
       <a class="brand-link" href="#home" aria-label="Meowzie’s Cafe home">
-        <img src="images/logo.png" alt="Meowzie’s Cafe official logo" class="header-logo" width="64" height="64">
+        <img src="images/logo.png" alt="Meowzie’s Cafe official logo" class="header-logo" width="64" height="64" decoding="async">
         <span class="brand-text">Meowzie’s Cafe</span>
       </a>
 
@@ -35,7 +35,7 @@
       <button class="cart-button" id="openCartButton" type="button" aria-controls="cartDrawer" aria-expanded="false">
         <span aria-hidden="true">🛒</span>
         <span>Cart</span>
-        <span class="cart-count" id="cartCount" aria-label="0 items in cart">0</span>
+        <span class="cart-count" id="cartCount" aria-label="0 items in cart" aria-live="polite">0</span>
       </button>
     </div>
   </header>
@@ -43,7 +43,7 @@
   <main id="main-content">
     <section class="hero" id="home" aria-labelledby="hero-title">
       <div class="hero-image-wrap" aria-hidden="true">
-        <img src="images/hero-kanlaon.jpg" alt="" class="hero-image">
+        <img src="images/hero-kanlaon.jpg" alt="" class="hero-image" width="1800" height="686" fetchpriority="high" decoding="async">
       </div>
       <div class="hero-overlay"></div>
       <div class="container hero-content">
@@ -97,7 +97,7 @@
            <h2 id="menu-title">Food & Drink Menu</h2>
 <p>Choose food or drinks, select an available size or flavor, set the quantity, then add the item to your cart.</p>
           </div>
-          <button class="button button-secondary desktop-cart-shortcut" id="menuCartButton" type="button">Review cart</button>
+          <button class="button button-secondary desktop-cart-shortcut" id="menuCartButton" type="button" aria-controls="cartDrawer" aria-expanded="false">Review cart</button>
         </div>
 
        <div class="category-filters" id="categoryFilters" role="group" aria-label="Filter food and drinks by category">
@@ -115,7 +115,8 @@
           <div class="notice notice-error">JavaScript is required for cart calculations and online ordering. Please enable JavaScript and reload this page.</div>
         </noscript>
 
-        <div class="product-grid" id="productGrid" aria-live="polite"></div>
+        <p class="sr-only" id="menuStatus" role="status" aria-live="polite" aria-atomic="true"></p>
+        <div class="product-grid" id="productGrid" aria-labelledby="menu-title"></div>
       </div>
     </section>
 
@@ -127,7 +128,7 @@
           <p>Our coffee identity is inspired by the farms and volcanic landscape around Kanlaon. It is a local point of pride and a distinctive foundation for the café’s hot and iced coffee drinks.</p>
           <p class="small-print">We only use Kanlaon coffee beans!</p>
         </div>
-        <img src="images/logo.png" alt="Meowzie’s Cafe cat logo with coffee, milk tea, coffee leaves, and Kanlaon mountain" class="coffee-story-logo" loading="lazy">
+        <img src="images/logo.png" alt="Meowzie’s Cafe cat logo with coffee, milk tea, coffee leaves, and Kanlaon mountain" class="coffee-story-logo" width="800" height="800" loading="lazy" decoding="async">
       </div>
     </section>
 
@@ -179,10 +180,9 @@
         <dl class="contact-list">
           <!-- OWNER EDIT: Replace the placeholder values below. Do not invent details. -->
           <div><dt>Address</dt><dd class="editable-placeholder">Near CHMSU in Enclaro, Binalbagan</dd></div>
-          <div><dt>Mobile number</dt><dd class="editable-placeholder">+63 993 463 3998</dd></div>
-          <div><dt>Email</dt><dd class="editable-placeholder">meow@meowziecafe.com</dd></div>
-          <div><dt>Facebook</dt><dd class="editable-placeholder">https://www.facebook.com/profile.php?id=61590639962770</dd></div>
-          <div><dt>Instagram</dt><dd class="editable-placeholder">https://www.instagram.com/meowziescafe</dd></div>
+          <div><dt>Mobile number</dt><dd class="editable-placeholder"><a href="tel:+639934633998">+63 993 463 3998</a></dd></div>
+          <div><dt>Email</dt><dd class="editable-placeholder"><a href="mailto:meow@meowziecafe.com">meow@meowziecafe.com</a></dd></div>
+          <div><dt>Facebook</dt><dd class="editable-placeholder"><a href="https://www.facebook.com/profile.php?id=61590639962770">Facebook page</a></dd></div>
           <div><dt>Operating hours</dt><dd class="editable-placeholder">Monday Through Friday 8AM-5PM</dd></div>
           <div><dt>Delivery area</dt><dd class="editable-placeholder">Near CHMSU within 2km</dd></div>
         </dl>
@@ -202,7 +202,7 @@
   </footer>
 
   <div class="drawer-backdrop" id="cartBackdrop" hidden></div>
-  <aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-labelledby="cartTitle" aria-hidden="true">
+  <aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-labelledby="cartTitle" aria-hidden="true" tabindex="-1">
     <div class="cart-header">
       <div>
         <p class="eyebrow">Your order</p>
@@ -222,6 +222,7 @@
     </div>
 
     <div class="cart-footer" id="cartFooter">
+      <div class="notice notice-error cart-availability-status" id="cartAvailabilityStatus" role="alert" hidden></div>
       <dl class="totals-list">
         <div><dt>Subtotal</dt><dd id="cartSubtotal">₱0</dd></div>
         <div><dt>Delivery fee</dt><dd id="cartDelivery">₱0</dd></div>
@@ -232,7 +233,7 @@
     </div>
   </aside>
 
-  <dialog class="checkout-dialog" id="checkoutDialog" aria-labelledby="checkoutTitle">
+  <dialog class="checkout-dialog" id="checkoutDialog" aria-modal="true" aria-labelledby="checkoutTitle" aria-describedby="checkoutPrivacy">
     <div class="checkout-shell">
       <div class="checkout-header">
         <div>
@@ -252,15 +253,15 @@
                 <div class="field-grid">
                   <div class="field field-wide">
                     <label for="fullName">Full name <span aria-hidden="true">*</span></label>
-                    <input id="fullName" name="full_name" type="text" autocomplete="name" maxlength="100" required>
-                    <span class="field-hint">Use the name the rider or café should ask for.</span>
+                    <input id="fullName" name="full_name" type="text" autocomplete="name" maxlength="100" aria-describedby="fullNameHint" required>
+                    <span class="field-hint" id="fullNameHint">Use the name the rider or café should ask for.</span>
                   </div>
 
                   <div class="field field-wide">
                     <label for="mobileNumber">Mobile number <span aria-hidden="true">*</span></label>
-                    <input id="mobileNumber" name="mobile_number" type="tel" inputmode="tel" autocomplete="tel" placeholder="09XX XXX XXXX or +63 9XX XXX XXXX" maxlength="20" required>
-                    <span class="field-hint">Philippine mobile formats beginning with 09 or +63 are accepted.</span>
-                    <span class="field-error" id="mobileNumberError"></span>
+                    <input id="mobileNumber" name="mobile_number" type="tel" inputmode="tel" autocomplete="tel" placeholder="09XX XXX XXXX or +63 9XX XXX XXXX" maxlength="20" aria-describedby="mobileNumberHint mobileNumberError" required>
+                    <span class="field-hint" id="mobileNumberHint">Philippine mobile formats beginning with 09 or +63 are accepted.</span>
+                    <span class="field-error" id="mobileNumberError" aria-live="polite"></span>
                   </div>
                 </div>
               </section>
@@ -295,22 +296,24 @@
                 <h3 id="payment-heading">GCash payment details</h3>
                 <div class="gcash-card">
                   <div>
-                    <img src="images/gcash-qr-placeholder.png" alt="Temporary GCash QR placeholder; the café owner must replace this image before accepting live orders" class="gcash-qr" id="gcashQrImage" width="520" height="520">
+                    <img src="images/gcash-qr.png" alt="GCash payment QR code; confirm the recipient in GCash before sending" class="gcash-qr" id="gcashQrImage" width="700" height="700" loading="lazy" decoding="async">
                   </div>
                   <div class="gcash-instructions">
                     <p><strong>Amount to send:</strong> <span id="gcashTotal">₱0</span></p>
-                    <p><strong>GCash account name:</strong> <span class="editable-placeholder" id="gcashAccountName">[REPLACE IN script.js]</span></p>
-                    <p><strong>GCash number:</strong> <span class="editable-placeholder" id="gcashAccountNumber">[REPLACE IN script.js]</span></p>
+                    <p><strong>GCash account name:</strong> <span id="gcashAccountName">Loading configured account…</span></p>
+                    <p><strong>GCash number:</strong> <span id="gcashAccountNumber">Loading configured account…</span></p>
                     <ol>
                       <li>Scan the QR code using GCash on another device, or save the QR image and open it in GCash if supported.</li>
+                      <li>Before sending, confirm the recipient shown in GCash matches the account name and number displayed here.</li>
                       <li>Send the exact total displayed above.</li>
                       <li>Keep your receipt and copy the GCash reference number.</li>
                       <li>Submit this form. Meowzie’s Cafe will manually verify the payment.</li>
                     </ol>
+                    <p class="small-print">This website cannot verify that the QR scan or payment succeeded.</p>
                   </div>
                 </div>
 
-                <div class="notice notice-warning" role="note">
+                <div class="notice notice-warning" id="paymentSafety" role="note">
                   <strong>Payment safety</strong>
                   <ul>
                     <li>Never provide your GCash MPIN or OTP.</li>
@@ -326,10 +329,11 @@
                   </div>
                   <div class="field">
                     <label for="gcashReference">GCash reference number <span aria-hidden="true">*</span></label>
-                    <input id="gcashReference" name="gcash_reference_number" type="text" inputmode="numeric" minlength="6" maxlength="30" autocomplete="off" required>
+                    <input id="gcashReference" name="gcash_reference_number" type="text" inputmode="numeric" minlength="6" maxlength="30" autocomplete="off" aria-describedby="gcashReferenceHint paymentSafety" required>
+                    <span class="field-hint" id="gcashReferenceHint">Enter the reference exactly as shown on your receipt. It will still require manual verification.</span>
                   </div>
                   <div class="field field-wide checkbox-field">
-                    <input id="paymentConfirmation" name="payment_confirmation" type="checkbox" required>
+                    <input id="paymentConfirmation" name="payment_confirmation" type="checkbox" aria-describedby="paymentSafety" required>
                     <label for="paymentConfirmation">I confirm that I sent the exact displayed total of <strong id="confirmationTotal">₱0</strong> to the GCash account shown above. <span aria-hidden="true">*</span></label>
                   </div>
                 </div>
@@ -344,11 +348,12 @@
                 <div><dt>Delivery fee</dt><dd id="checkoutDelivery">₱49</dd></div>
                 <div class="grand-total"><dt>Total</dt><dd id="checkoutTotal">₱0</dd></div>
               </dl>
-              <p class="small-print">Your cart and entered information stay in this browser if submission fails or the page is refreshed.</p>
+              <p class="small-print" id="checkoutPrivacy">Your cart and entered checkout information are saved only in this browser so a refresh or failed submission does not erase them. On a shared device, clear the saved details before leaving.</p>
+              <button class="remove-button clear-draft-button" id="clearCheckoutDraftButton" type="button">Clear saved checkout details</button>
             </aside>
           </div>
 
-          <div class="submission-status" id="submissionStatus" role="alert" aria-live="assertive"></div>
+          <div class="submission-status" id="submissionStatus" role="alert" aria-live="assertive" aria-atomic="true" tabindex="-1"></div>
           <div class="checkout-actions">
             <button class="button button-secondary" id="backToCartButton" type="button">Back to cart</button>
             <button class="button button-primary" id="submitOrderButton" type="submit">Submit order for verification</button>
@@ -372,4 +377,3 @@
   <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 </body>
 </html>
-
